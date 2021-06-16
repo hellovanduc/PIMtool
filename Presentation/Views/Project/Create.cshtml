@@ -1,0 +1,142 @@
+﻿@using Repositories.Models
+@using Repositories.Enums
+@using System.Linq
+@using Library.Resources.Resources
+@using System.Globalization
+@model PIMTool.ViewModels.CreateProjectViewModel
+
+@{ CultureInfo cultureInfo = new CultureInfo(Culture); }
+
+<div class="content_header">
+    <p>@((Model.EditMode)?Resources.EditProjectInfor:Resources.NewProject)</p>
+</div>
+<hr>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div id="new_project_form">
+@if (Model.Error != null)
+{
+    <div class="row alert alert-danger">
+        <p>@Model.Error</p>
+    </div>
+}
+    <div class="row form-group">
+        @Html.HiddenFor(model => model.EditMode)
+        @Html.HiddenFor(model => model.VERSION)
+        @Html.LabelFor(model => model.PROJECT_NUMBER, htmlAttributes: new { @class = "col-lg-3 required" })
+        <div class="col-lg-3">
+            @if (Model.EditMode)
+            {
+                @Html.EditorFor(model => model.PROJECT_NUMBER, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.HiddenFor(model => model.PROJECT_NUMBER)
+            }
+            else
+            {
+                @Html.EditorFor(model => model.PROJECT_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
+            }
+        </div>
+        @Html.ValidationMessageFor(model => model.PROJECT_NUMBER, "", new { @class = "text-danger col-lg-9 offset-lg-3" })
+    </div>
+    <div class="row form-group">
+        @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "col-lg-3 required" })
+        <div class="col-lg-9">
+            @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger col-lg-9 offset-lg-3" })
+    </div>
+    <div class="row form-group">
+        @Html.LabelFor(model => model.CUSTOMER, htmlAttributes: new { @class = "col-lg-3 required" })
+        <div class="col-lg-9">
+            @Html.EditorFor(model => model.CUSTOMER, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        @Html.ValidationMessageFor(model => model.CUSTOMER, "", new { @class = "text-danger col-lg-9 offset-lg-3" })
+    </div>
+    <div class="row form-group">
+        @Html.LabelFor(model => model.GROUP, htmlAttributes: new { @class = "col-lg-3 required" })
+
+        <div class="col-lg-3">
+            @Html.DropDownListFor(model => model.GROUP, Model.AllGroups,
+            new { @class = "form-control" })
+        </div>
+
+        @Html.ValidationMessageFor(model => model.GROUP, "", new { @class = "text-danger col-lg-9 offset-lg-3" })
+    </div>
+    <div class="row form-group">
+        @Html.LabelFor(model => model.MEMBERS, htmlAttributes: new { @class = "col-lg-3" })
+
+        <div class="col-lg-9">
+            @Html.ListBoxFor(model => model.MEMBERS, Model.AllEmployees,
+            new { @class = "form-control select2-multiple", @multiple = "multiple" })
+        </div>
+
+        @Html.ValidationMessageFor(model => model.MEMBERS, "", new { @class = "text-danger col-lg-9 offset-lg-3" })
+    </div>
+    <div class="row form-group">
+        @Html.LabelFor(model => model.STATUS, htmlAttributes: new { @class = "col-lg-3 required" })
+
+        <div class="col-lg-3">
+            @Html.DropDownListFor(model => model.STATUS, Model.AllStatus,
+            new { @class = "form-control" })
+        </div>
+
+        @Html.ValidationMessageFor(model => model.STATUS, "", new { @class = "text-danger col-lg-9 offset-lg-3" })
+    </div>
+    <div class="row form-group">
+        @Html.LabelFor(model => model.START_DATE, htmlAttributes: new { @class = "col-lg-3 required" })
+        <div class="col-lg-3">
+            @Html.EditorFor(model => model.START_DATE,
+           new { htmlAttributes = new { @class = "form-control", @data_val_date = Resources.DateOnlyError } })
+            @Html.ValidationMessageFor(model => model.START_DATE, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.LabelFor(model => model.END_DATE, htmlAttributes: new { @class = "col-lg-2 offset-lg-1" })
+        <div class="col-lg-3">
+            @Html.EditorFor(model => model.END_DATE,
+           new { htmlAttributes = new { @class = "form-control", @data_val_date = Resources.DateOnlyError } })
+            @Html.ValidationMessageFor(model => model.END_DATE, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+</div>
+    <hr>
+    <div class="row" id="buttons">
+        <div class="col-lg-9">
+            <button id="btn_cancel" class="btn" data-toggle="modal"
+                    data-target="#cancelModal">
+                @Resources.Cancel
+            </button>
+        </div>
+        <div class="col-lg-3">
+            <button type="submit" class="btn btn-primary">@((Model.EditMode)? @Resources.EditProject : @Resources.CreateProject)</button>
+        </div>
+    </div>
+}
+
+<!--    End of content  -->
+<!-- Cancel Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">@Resources.ConfirmGoHomeTitle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Resources.ConfirmGoHome
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Resources.No</button>
+                <a href="/@Culture/project?searchString=@((string)Session["searchString"])&projectStatus=@((string)Session["projectStatus"])&sortOrder=@((string)Session["sortOrder"])" class="btn btn-primary">@Resources.Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Cancel Modal -->
+@section Scripts{
+    @Scripts.Render("~/bundles/projectCreate")
+}

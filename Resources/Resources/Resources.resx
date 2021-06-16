@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>Project Information Management</value>
+  </data>
+  <data name="BackToSearchProject" xml:space="preserve">
+    <value>back to search project</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Do you really want to delete the project(s) with number:</value>
+  </data>
+  <data name="ConfirmDeleteTitle" xml:space="preserve">
+    <value>Delete project(s)</value>
+  </data>
+  <data name="ConfirmGoHome" xml:space="preserve">
+    <value>Do you really want to leave this page, the process will not be saved?</value>
+  </data>
+  <data name="ConfirmGoHomeTitle" xml:space="preserve">
+    <value>Go to homepage</value>
+  </data>
+  <data name="ContactAdmin" xml:space="preserve">
+    <value>contact your administrator</value>
+  </data>
+  <data name="CreateANewProject" xml:space="preserve">
+    <value>when you try to create a new project with project number:</value>
+  </data>
+  <data name="CreateProject" xml:space="preserve">
+    <value>Create Project</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="CustomerTooLongError" xml:space="preserve">
+    <value>The customer field is not longer than 50 characters</value>
+  </data>
+  <data name="CutomerRequireError" xml:space="preserve">
+    <value>Customer is required</value>
+  </data>
+  <data name="DateOnlyError" xml:space="preserve">
+    <value>Date only</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteProjectsByProjectNumber" xml:space="preserve">
+    <value>delete the project(s) which have the following project number</value>
+  </data>
+  <data name="DeleteSelectedItems" xml:space="preserve">
+    <value>delete selected item(s)</value>
+  </data>
+  <data name="EditProject" xml:space="preserve">
+    <value>Edit Project</value>
+  </data>
+  <data name="EditProjectInfor" xml:space="preserve">
+    <value>Edit Project Information</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="EndDateEalierThanStartDateError" xml:space="preserve">
+    <value>End date must be later than start date</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorMandatoryField" xml:space="preserve">
+    <value>Please enter all the mandatory fields (*).</value>
+  </data>
+  <data name="ErrorOccurAtDataAccess" xml:space="preserve">
+    <value>An error occur at data access layer when you try to </value>
+  </data>
+  <data name="FindAllEmployees" xml:space="preserve">
+    <value>find all employees</value>
+  </data>
+  <data name="FindAllGroups" xml:space="preserve">
+    <value>find all groups</value>
+  </data>
+  <data name="FindAllProjects" xml:space="preserve">
+    <value>find all projects</value>
+  </data>
+  <data name="FindEmployeesByVisas" xml:space="preserve">
+    <value>find employees by the following visas</value>
+  </data>
+  <data name="FindGroupByGroupName" xml:space="preserve">
+    <value>find the group which has name</value>
+  </data>
+  <data name="FindProjectByProjectNumber" xml:space="preserve">
+    <value>find project by project number</value>
+  </data>
+  <data name="FollowingProjectNumberAlreadyExist" xml:space="preserve">
+    <value>The following project number already exists</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="GroupRequireError" xml:space="preserve">
+    <value>Group is required</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="InvalidGroupNameError" xml:space="preserve">
+    <value>The group name does not exist</value>
+  </data>
+  <data name="InvalidVisasError" xml:space="preserve">
+    <value>The followiing visas do not exist</value>
+  </data>
+  <data name="ItemsSelected" xml:space="preserve">
+    <value>item(s) selected</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameTooLongError" xml:space="preserve">
+    <value>The project name is not longer than 50 characters</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>New Project</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Please" xml:space="preserve">
+    <value>Please</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>Project List</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Project name</value>
+  </data>
+  <data name="ProjectNameRequireError" xml:space="preserve">
+    <value>Project name is required</value>
+  </data>
+  <data name="ProjectNumber" xml:space="preserve">
+    <value>Project number</value>
+  </data>
+  <data name="ProjectNumberAlreadyExist" xml:space="preserve">
+    <value>The project number already exist. Please select a different number.</value>
+  </data>
+  <data name="ProjectNumberRangeError" xml:space="preserve">
+    <value>The project number must have value from 1000 to 9999</value>
+  </data>
+  <data name="ProjectNumberRequireError" xml:space="preserve">
+    <value>Project number is required</value>
+  </data>
+  <data name="ResetSearch" xml:space="preserve">
+    <value>Reset Search</value>
+  </data>
+  <data name="SearchCriteria" xml:space="preserve">
+    <value>Number, name, customer</value>
+  </data>
+  <data name="SearchProject" xml:space="preserve">
+    <value>Search Project</value>
+  </data>
+  <data name="StaleProjectError" xml:space="preserve">
+    <value>The project with the following project number has been updated since the last time you load it: </value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="StartDateRequireError" xml:space="preserve">
+    <value>Start date is required</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusFIN" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="StatusINP" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="StatusNEW" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="StatusPLA" xml:space="preserve">
+    <value>Planning</value>
+  </data>
+  <data name="StatusRequireError" xml:space="preserve">
+    <value>Status is required</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="TitleCreateProject" xml:space="preserve">
+    <value>Create Project</value>
+  </data>
+  <data name="TitleEditProject" xml:space="preserve">
+    <value>Edit Project</value>
+  </data>
+  <data name="TitleListProject" xml:space="preserve">
+    <value>List Project</value>
+  </data>
+  <data name="UnexpectedErrorOccurred" xml:space="preserve">
+    <value>Unexpected Error Occurred</value>
+  </data>
+  <data name="UpdateProjectByProjectNumber" xml:space="preserve">
+    <value>update project by project number</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>

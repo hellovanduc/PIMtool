@@ -1,0 +1,62 @@
+/*  Search Bar  */
+#btn_search {
+    margin-left: 3%;
+}
+#btn_reset {
+    color: #2e83fa;
+    background-color: none;
+}
+#projectStatus {
+    margin-left: 3%;
+}
+/*  End of Search Bar   */
+
+/*  Table of Project List   */
+table {
+    font-size: 14pt;
+    font-weight: 600;
+    color: #666666;
+}
+tr a {
+    color: #666666;
+}
+tr {
+    height: 32px;
+}
+#project_table_head th a {
+    color: #212529;
+    font-weight: bold;
+}
+/*  Check boxes */
+td input {
+    height: 15px;
+    width: 15px;
+}
+/*  End of Check boxes */
+/*  Button Delete  */
+tr td:nth-child(7) {
+    text-align: center;
+}
+/*  End of Button Delete */
+
+/*  Table Footer  */
+tfoot {
+    color: #2F85FA;
+    background-color: rgb(231, 248, 247);
+}
+#btn_delete_selected_items {
+    float: right;
+}
+#btn_delete_selected_items a {
+    color: red;
+}
+/*  End of Table Footer */
+/*  End of Table of Project List    */
+
+/*  Medium and Other Smaller Screen */
+@media (max-width: 991px) {
+    #btn_search, #projectStatus, #btn_reset {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}

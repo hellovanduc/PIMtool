@@ -1,0 +1,53 @@
+/*  New Project form    */
+#new_project_form label {
+    font-size: 14pt;
+    font-weight: 600;
+    color: #666666;
+    padding-left: 0;
+}
+#new_project_form .row {
+    margin-top: 38px;
+    margin-bottom: 38px;
+    padding-left: 20px;
+}
+form label.required:after
+{
+    color: red;
+    content: " *";
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 1px solid #ced4da;
+}
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #ced4da;
+}
+/*  Cancel/Submit form  */
+#buttons {
+    margin-top: 38px;
+    margin-bottom: 38px;
+}
+#btn_cancel {
+    float: right;
+    background-color: #B9B9B9;
+}
+#btn_create {
+    float: right;
+}
+/*  End of Cancel/Submit form   */
+
+/*  Error block */
+.error_message_box {
+    height: 30px;
+    width: 100%;
+}
+/*  End of error block  */
+
+/*  End of New Project form */
+
+/*  Medium and Other Smaller Screen */
+@media (max-width: 991px) {
+    #btn_cancel {
+        float: none;
+        margin-bottom: 5px;
+    }
+}

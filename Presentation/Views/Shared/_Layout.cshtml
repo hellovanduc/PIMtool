@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+@using Library.Resources.Resources
+@using System.Web.Mvc
+@{
+    string culture = ViewContext.RouteData.GetRequiredString("culture").ToLower();
+    string controller = ViewContext.RouteData.GetRequiredString("controller").ToLower();
+    string action = ViewContext.RouteData.GetRequiredString("action").ToLower();
+    string id = Convert.ToString(ViewContext.RouteData.Values["id"]);
+    string searchString = (string)Session["searchString"];
+    string projectStatus = (string)Session["projectStatus"];
+    string sortOrder = (string)Session["sortOrder"];
+}
+
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/select2")
+    @Styles.Render("~/Content/PagedList")
+    @Styles.Render("~/Content/custom")
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <div class="container">
+        <header class="row">
+            <div id="brand" class="col-12 col-lg-7">
+                <p>
+                    <a href="/@Culture/project?searchString=@searchString&projectStatus=@projectStatus&sortOrder=@sortOrder">
+                        <img src="~/Images/logo_elca.png" alt="Logo ELCA" id="logo" class="d-none d-sm-inline">
+                        <span id="brand_name">@Resources.AppName</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col-3 offset-3 col-lg-2 offset-lg-0" id="language">
+                <a href="/en/@controller/@action/@id"
+                   id="btn_vi" class=@((culture=="en")?"current_language":"")>EN</a>
+                <a href="/vi/@controller/@action/@id"
+                   id="btn_en" class=@((culture=="vi")?"current_language":"")> | VI</a>
+            </div>
+            <div id="horizontal_menu" class="col-6 col-lg-3 row">
+                <a href="#" class="col-6">@Resources.Help</a>
+                <a href="#" class="col-6">@Resources.Logout</a>
+            </div>
+        </header>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <button class="btn btn-group m-auto navbar-toggler d-lg-none d-block" id="btn_menu"
+                    data-toggle="collapse" data-target="#nav_bar_box" aria-controls="nav_bar_box"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                @Resources.Menu
+            </button>
+
+            <div class="col-lg-2 navbar-collapse collapse expand-lg" id="nav_bar_box">
+                <ul class="navbar-nav" id="nav_bar">
+                    <li id="nav_bar_home" class="nav-item @((controller=="project" && action=="index")?"current_item":"")">
+                        <a href="/@Culture/project?searchString=@searchString&projectStatus=@projectStatus&sortOrder=@sortOrder"
+                           class="nav-link">@Resources.ProjectList</a>
+                    </li>
+                    <p id="nav_bar_new">@Resources.New</p>
+                    <li class="nav-item nav_bar_item @((controller=="project" && action=="create")?"current_item":"")">
+                        <a href="/@culture/project/create"
+                           id="nav_project" class="nav-link">@Resources.Project</a>
+                    </li>
+                    <li class="nav-item nav_bar_item"><a href="#" class="nav-link">@Resources.Customer</a></li>
+                    <li class="nav-item nav_bar_item"><a href="#" class="nav-link">@Resources.Supplier</a></li>
+                </ul>
+            </div>
+
+            <div class="col-12 col-lg-10 content">
+                <!-- Content -->
+                @RenderBody()
+                <!-- End of Content -->
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/select2")
+    @RenderSection("Scripts", false)
+</body>
+
+</html>

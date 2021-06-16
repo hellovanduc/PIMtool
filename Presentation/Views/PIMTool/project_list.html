@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Project List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/project_list.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="row">
+            <div id="brand" class="col-7">
+                <p><a href="./project_list.html">
+                        <img src="./images/logo_elca.png" alt="Logo ELCA" id="logo">
+                        <span id="brand_name">Project Information Management</span>
+                    </a></p>
+            </div>
+            <div class="col-3" id="language">
+                <a href="#" class="current_language">EN</a>
+                <a href="#"> | VI</a>
+            </div>
+            <div id="horizontal_menu" class="col-2 row">
+                <a href="#" class="col-4">Help</a>
+                <a href="#" class="col-8">Log out</a>
+            </div>
+        </header>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <nav class="col-2" id="nav_bar">
+                <div id="nav_bar_home" class="current_item"><a href="./project_list.html">Projects list</a></div>
+                <p id="nav_bar_new">New</p>
+                <div class="nav_bar_item"><a href="./project_create.html" id="nav_project">Project</a>
+                </div>
+                <div class="nav_bar_item"><a href="#">Customer</a></div>
+                <div class="nav_bar_item"><a href="#">Supplier</a></div>
+            </nav>
+            <!--    Content -->
+            <div class="col-10 content">
+                <div class="content_header">
+                    <p>Project List</p>
+                </div>
+                <hr>
+                <div class="row search_bar">
+                    <input class="col-4 form-control" type="text" name="search_keyword"
+                        placeholder="Number, name, customer">
+                    <select class="col-2 form-control" id="project_status" name="project_status">
+                        <option value="" selected>Status</option>
+                        <option value="New">New</option>
+                        <option value="Finished">Finished</option>
+                        <option value="On progress">On progress</option>
+                    </select>
+                    <button class="col-3 btn btn-primary" id="btn_search">Search Project</button>
+                    <a class="col-2 btn" id="btn_reset">Reset Search</a>
+                </div>
+                <br>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Customer</th>
+                            <th>Start Date</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="project_table_body">
+                        <tr>
+                            <td><input type="checkbox" disabled></td>
+                            <td><a href="./project/edit/id">0001</a></td>
+                            <td>Viacar ABC</td>
+                            <td>New</td>
+                            <td>AAAA</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#" hidden><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><a href="./project/edit/id">0002</a></td>
+                            <td>Viacar DEF </td>
+                            <td>On progress</td>
+                            <td>BBBB</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#"><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" disabled></td>
+                            <td><a href="./project/edit/id">0003</a></td>
+                            <td>Viacar GHK</td>
+                            <td>New</td>
+                            <td>CCCC</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#" hidden><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><a href="./project/edit/id">0004</a></td>
+                            <td>Viacar MNP</td>
+                            <td>Finished</td>
+                            <td>DDDD</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#"><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" disabled></td>
+                            <td><a href="./project/edit/id">0005</a></td>
+                            <td>Viacar KAM</td>
+                            <td>New</td>
+                            <td>EEEE</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#" hidden><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><a href="./project/edit/id">0006</a></td>
+                            <td>Viacar QHQ</td>
+                            <td>Finished</td>
+                            <td>FFFF</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#"><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><a href="./project/edit/id">0007</a></td>
+                            <td>Viacar VVF</td>
+                            <td>Finished</td>
+                            <td>GGGG</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#"><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><a href="./project/edit/id">0008</a></td>
+                            <td>Viacar PPC</td>
+                            <td>Finished</td>
+                            <td>HHHH</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#"><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" disabled></td>
+                            <td><a href="./project/edit/id">0009</a></td>
+                            <td>Viacar CDC</td>
+                            <td>New</td>
+                            <td>YYYY</td>
+                            <td>25.02.2004</td>
+                            <td><a href="#" hidden><img class="btn_delete" width="20px" height="20px"
+                                        src="./images/button_delete.webp"></a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot id="project_table_foot" hidden>
+                        <tr>
+                            <td colspan="7">
+                                <span id="num_of_selected">0</span> items selected
+                                <span id="btn_delete_selected_items"><a href="#">delete selected items <img
+                                            class="btn_delete" width="20px" height="20px"
+                                            src="./images/button_delete.webp"></a></span>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!--    End of Content -->
+
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete project</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-primary">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Delete Modal -->
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="./scripts/project_list.js"></script>
+</body>
+
+</html>

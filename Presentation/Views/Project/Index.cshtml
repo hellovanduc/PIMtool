@@ -1,0 +1,151 @@
+﻿@using Services
+@using Repositories.Models
+@using Repositories.Enums
+@using Library.Resources.Resources
+@using System.Globalization
+@using System.Collections.Generic;
+@using PagedList.Mvc
+@model PagedList.IPagedList<PROJECT>
+
+@{ CultureInfo cultureInfo = new CultureInfo(Culture); }
+<div class="content_header">
+    <p>@Resources.ProjectList</p>
+</div>
+<hr>
+@using (Html.BeginForm("Index", "Project"))
+{
+    <div class="row search_bar">
+        @Html.TextBox("searchString", (string)Session["searchString"], new
+        {
+            @class = "col-lg-4 form-control",
+            @placeholder = @Resources.SearchCriteria
+        })
+        @Html.DropDownList("projectStatus", (SelectList)ViewBag.statusFilter, Resources.Status,
+                new { @class = "col-lg-2 form-control" })
+        @Html.Hidden("sortOrder", "number")
+        <button class="col-lg-3 btn btn-primary" id="btn_search" type="submit">@Resources.SearchProject</button>
+        <a href="/@Culture/project" class="col-lg-2 btn" id="btn_reset">@Resources.ResetSearch</a>
+    </div>
+}
+<br>
+<div class="table_container">
+    <table class="table table-bordered table-hover">
+        <thead id="project_table_head">
+            <tr>
+                <th></th>
+                <th>
+                    <a href="/@Culture/project?searchString=@(Session["searchString"])&projectStatus=@(Session["projectStatus"])&sortOrder=@SortOrder.number.ToString()">
+                        @Resources.Number
+                    </a>
+                </th>
+                <th>
+                    <a href="/@Culture/project?searchString=@(Session["searchString"])&projectStatus=@(Session["projectStatus"])&sortOrder=@SortOrder.name.ToString()">
+                        @Resources.Name
+                    </a>
+                </th>
+                <th>
+                    <a href="/@Culture/project?searchString=@(Session["searchString"])&projectStatus=@(Session["projectStatus"])&sortOrder=@SortOrder.status.ToString()">
+                        @Resources.Status
+                    </a>
+                </th>
+                <th>
+                    <a href="/@Culture/project?searchString=@(Session["searchString"])&projectStatus=@(Session["projectStatus"])&sortOrder=@SortOrder.customer.ToString()">
+                        @Resources.Customer
+                    </a>
+                </th>
+                <th>
+                    <a href="/@Culture/project?searchString=@(Session["searchString"])&projectStatus=@(Session["projectStatus"])&sortOrder=@SortOrder.date.ToString()">
+                        @Resources.StartDate
+                    </a>
+                </th>
+                <th>@Resources.Delete</th>
+            </tr>
+        </thead>
+        <tbody id="project_table_body">
+            @foreach (var project in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" disabled="@(project.STATUS != Status.NEW)"></td>
+                    <td>
+                        <a href="/@Culture/project/edit/@project.PROJECT_NUMBER">
+                            @project.PROJECT_NUMBER
+                        </a>
+                    </td>
+                    <td>@project.NAME</td>
+                    @switch (project.STATUS)
+                    {
+                        case Status.NEW:
+                            <td>@Resources.StatusNEW</td>
+                            break;
+                        case Status.INP:
+                            <td>@Resources.StatusINP</td>
+                            break;
+                        case Status.FIN:
+                            <td>@Resources.StatusFIN</td>
+                            break;
+                        case Status.PLA:
+                            <td>@Resources.StatusPLA</td>
+                            break;
+                    }
+                    <td>@project.CUSTOMER</td>
+                    <td>@project.START_DATE.ToString(cultureInfo.DateTimeFormat.ShortDatePattern)</td>
+                    <td>
+                        @if (project.STATUS == Status.NEW)
+                        {
+                            <a href="#">
+                                <img class="btn_delete" width="20px" height="20px"
+                                     src="~/Images/delete_btn.png">
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot id="project_table_foot" hidden>
+            <tr>
+                <td colspan="7">
+                    <span id="num_of_selected">0</span> @Resources.ItemsSelected
+                    <span id="btn_delete_selected_items">
+                        <a href="#">
+                            @Resources.DeleteSelectedItems <img width="20px" height="20px"
+                                                                src="~/Images/delete_btn.png">
+                        </a>
+                    </span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<p class="m-auto">
+    @Resources.Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+</p>
+@Html.PagedListPager(Model, page => Url.Action("Index", "Project",
+    new { page, searchString = Session["searchString"], projectStatus = Session["projectStatus"], sortOrder = Session["sortOrder"] }))
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">@Resources.ConfirmDeleteTitle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_delete" method="post"
+                      action="/@Culture/project/delete">
+                    <input type="text" name="project_numbers" hidden />
+                </form>
+                <p>@Resources.ConfirmDelete <span id="project_number_to_delete"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Resources.No</button>
+                <button type="button" class="btn btn-primary">@Resources.Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Delete Modal -->
+@section Scripts{
+    @Scripts.Render("~/bundles/projectList")
+}

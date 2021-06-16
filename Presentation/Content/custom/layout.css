@@ -1,0 +1,111 @@
+/*  Header  */
+header {
+    padding-top: 2vw;
+    padding-bottom: 1vw;
+}
+
+/*  Brand   */
+#logo {
+    padding-right: 5%;
+}
+#brand_name {
+    font-weight: bold;
+    font-size: 20pt;
+    color: #666666;
+    padding-top: 2vw;
+}
+/*  End of Brand    */
+
+/*  Language  */
+#language {
+    font-weight: 600;
+    padding-top: 30px;
+    text-align: right;
+    font-size: 14pt;
+}
+.current_language, .current_language:hover {
+    color: #666666;
+    text-decoration: none;
+    cursor: default;
+    pointer-events: none;
+}
+/*  End of Language  */
+
+/*  Horizontal Menu */
+#horizontal_menu {
+    padding-top: 30px;
+    font-size: 14pt;
+    text-align: right;
+}
+#horizontal_menu a:nth-child(2) {
+    color: #666666;
+}
+/*  End of Horizontal Menu  */
+
+/*  End of Header   */
+
+hr {
+    margin-top: 0;
+}
+
+/*  Navigation bar   */
+#nav_bar {
+    padding-left: 3%;
+    list-style: none;
+}
+#nav_bar_new, #nav_bar_home{
+    font-size: 18pt;
+    color: #2F85FA;
+}
+#nav_bar_new {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+#nav_bar a {
+    text-decoration: none;
+}
+.nav_bar_item{
+    padding-bottom: 10px;
+}
+.nav_bar_item a {
+    color: #666666;
+    font-size: 14pt;
+}
+.current_item a, .current_item a:hover {
+    color: #333333;
+}
+/*  End of navigation bar   */
+/*  Content */
+.content {
+    padding-left: 20px;
+    margin-bottom: 50px;
+}
+/*  End of Content  */
+
+/*  Content header  */
+.content_header {
+    font-size: 18pt;
+    font-weight: 600;
+    color: #666666;
+}
+/*  End of Content header   */
+
+/*  Medium and Other Smaller Screen */
+@media (max-width: 991px){
+    #brand_name {
+        font-size: 18pt;
+    }
+    #language, #horizontal_menu {
+        padding-top: 0;
+    }
+    #nav_bar {
+        text-align: center;
+    }
+}
+
+/*  Large and Other Larger Screen */
+@media (min-width: 992px) {
+    .expand-lg {
+        display: block !important;
+    }
+}

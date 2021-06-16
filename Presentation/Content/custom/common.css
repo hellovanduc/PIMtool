@@ -1,0 +1,43 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+p, a {
+    font-weight: 600;
+}
+a:hover {
+    text-decoration: none;
+}
+.btn {
+    height: 35px;
+    width: 150px;
+    font-weight: 600;
+}
+.btn-primary {
+    color: white;
+    background-color: #2F85FA;
+}
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+.table_container {
+    overflow-x: auto;
+}
+/*  Error message    */
+.error_message {
+    color: #B00020;
+}
+.error_message_box {
+    background-color: #FFCCCC;
+}
+.error_block {
+    border-color: #B00020;
+}
+/* End of error message */
+.color_orange {
+    color: #f06a35;
+}
+.color_orange:hover {
+    color: #f5a369;
+}

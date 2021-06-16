@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+@using Library.Resources.Resources
+@{
+    Layout = null;
+    string searchString = (string)Session["searchString"];
+    string projectStatus = (string)Session["projectStatus"];
+    string sortOrder = (string)Session["sortOrder"];
+}
+
+<head>
+    <title>@Resources.Error</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/custom")
+</head>
+<body>
+
+    <div class="container">
+        <header class="row">
+            <div id="brand" class="col-12 col-lg-7">
+                <p>
+                    <a href="/@Culture/project?searchString=@searchString&projectStatus=@projectStatus&sortOrder=@sortOrder">
+                        <img src="~/Images/logo_elca.png" alt="Logo ELCA" id="logo" class="d-none d-sm-inline">
+                        <span id="brand_name">@Resources.AppName</span>
+                    </a>
+                </p>
+            </div>
+            <div id="horizontal_menu" class="col-12 col-lg-5 row">
+                <a href="#" class="col-6">@Resources.Help</a>
+                <a href="#" class="col-6">@Resources.Logout</a>
+            </div>
+        </header>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 d-md-block d-none">
+                <img src="~/Images/error_icon.png" alt="Error" style="width: 100%; height: auto" />
+            </div>
+            <div class="col-md-6">
+                @if (@ViewBag.ErrorMsg != "")
+                {
+                    <h2>@ViewBag.ErrorMsg</h2>
+                }
+                else
+                {
+                    <h2>@Resources.UnexpectedErrorOccurred</h2>
+                }
+                <h2>@Resources.Please <a href="#" class="color_orange">@Resources.ContactAdmin</a></h2>
+                <br />
+                <h2>@Resources.or 
+                    <a href="/@Culture/project?searchString=@searchString&projectStatus=@projectStatus&sortOrder=@sortOrder">
+                    @Resources.BackToSearchProject</a>
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+
+</html>
