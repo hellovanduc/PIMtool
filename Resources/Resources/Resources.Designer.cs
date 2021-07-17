@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Library.Resources.Resources {
+namespace Resources.Resources.Resources {
     using System;
     
     

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{99BFAAE9-D330-497C-9CB8-D046CF4D1399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Resources\Library.csproj", "{5E4E73E8-1094-4B1F-A684-73ACE8459913}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{5E4E73E8-1094-4B1F-A684-73ACE8459913}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIMTool", "Presentation\PIMTool.csproj", "{98D7025A-6890-4CEA-B84C-B6E7F7AC5B79}"
 EndProject

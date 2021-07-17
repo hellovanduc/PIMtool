@@ -1,5 +1,4 @@
-﻿using Library.Constants;
-using Library.Resources.Resources;
+﻿using Resources.Constants;
 using System.Collections.Generic;
 
 namespace Services.Exceptions
@@ -11,7 +10,7 @@ namespace Services.Exceptions
 
         }
         public InvalidVisasException(List<string> invalidVisas)
-            : base(Resources.InvalidVisasError + Constants.Colon + string.Join(Constants.Seperator.ToString(), invalidVisas))
+            : base(Resources.Resources.Resources.Resources.InvalidVisasError + Constants.Colon + string.Join(Constants.Seperator.ToString(), invalidVisas))
         {
 
         }

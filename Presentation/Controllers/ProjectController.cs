@@ -1,9 +1,8 @@
-﻿using Library.Constants;
-using Library.Resources.Resources;
-using PagedList;
+﻿using PagedList;
 using PIMTool.ViewModels;
 using Repositories.Enums;
 using Repositories.Models;
+using Resources.Constants;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -37,7 +36,7 @@ namespace PIMTool.Controllers
                 statusFilter.First(s => s.Value == projectStatus).Selected = true;
             }
 
-            ViewBag.Title = $"{Resources.TitleListProject} | PIM tool";
+            ViewBag.Title = $"{Resources.Resources.Resources.Resources.TitleListProject} | PIM tool";
             ViewBag.statusFilter = statusFilter;
             Session["sortOrder"] = sortOrder;
             Session["projectStatus"] = projectStatus;
@@ -49,7 +48,7 @@ namespace PIMTool.Controllers
         // GET
         public ActionResult Create()
         {
-            ViewBag.Title = $"{Resources.TitleCreateProject} | PIM tool";
+            ViewBag.Title = $"{Resources.Resources.Resources.Resources.TitleCreateProject} | PIM tool";
 
             CreateProjectViewModel project = new CreateProjectViewModel
             {
@@ -70,7 +69,7 @@ namespace PIMTool.Controllers
         {
             if (ModelState.IsValid)
             {
-                PROJECT project = new PROJECT
+                Project project = new Project
                 {
                     PROJECT_NUMBER = viewModel.PROJECT_NUMBER,
                     CUSTOMER = viewModel.CUSTOMER,
@@ -92,7 +91,7 @@ namespace PIMTool.Controllers
             }
             else
             {
-                viewModel.Error = FindErrorInModel(ModelState);  
+                viewModel.Error = FindErrorInModel(ModelState);
                 viewModel.AllGroups = CreateSelectListGroup();
                 viewModel.AllEmployees = CreateMultiSelectListEmployees();
                 viewModel.AllStatus = CreateSelectListStatus();
@@ -103,11 +102,11 @@ namespace PIMTool.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.Title = $"{Resources.TitleEditProject} | PIM tool";
+            ViewBag.Title = $"{Resources.Resources.Resources.Resources.TitleEditProject} | PIM tool";
             ViewBag.Groups = service.FindAllGroups();
             ViewBag.Employees = service.FindAllEmployees();
 
-            PROJECT project = service.FindProjectByProjectNumber(id);
+            Project project = service.FindProjectByProjectNumber(id);
             CreateProjectViewModel viewModel = new CreateProjectViewModel
             {
                 PROJECT_NUMBER = project.PROJECT_NUMBER,
@@ -134,7 +133,7 @@ namespace PIMTool.Controllers
         {
             if (ModelState.IsValid)
             {
-                PROJECT project = new PROJECT
+                Project project = new Project
                 {
                     PROJECT_NUMBER = viewModel.PROJECT_NUMBER,
                     CUSTOMER = viewModel.CUSTOMER,
@@ -231,7 +230,7 @@ namespace PIMTool.Controllers
                 {
                     foreach (var error in item.Value.Errors)
                     {
-                        errors.Append(error.ErrorMessage + Constants.Colon);
+                        errors.Append(error.ErrorMessage + Constants.Semicolon);
                     }
                 }
             }

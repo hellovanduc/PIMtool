@@ -1,6 +1,5 @@
 ﻿
-using Library.Constants;
-using Library.Resources.Resources;
+using Resources.Constants;
 
 namespace Services.Exceptions
 {
@@ -11,7 +10,7 @@ namespace Services.Exceptions
 
         }
         public InvalidGroupNameException(string groupName)
-            : base(Resources.InvalidGroupNameError + Constants.Colon + groupName)
+            : base(Resources.Resources.Resources.Resources.InvalidGroupNameError + Constants.Colon + groupName)
         {
 
         }

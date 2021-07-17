@@ -1,5 +1,4 @@
-﻿using Library.Constants;
-using Library.Resources.Resources;
+﻿using Resources.Constants;
 using System;
 
 namespace Services.Exceptions
@@ -12,7 +11,7 @@ namespace Services.Exceptions
         }
 
         public ProjectNumberAlreadyExistsException(int projectNumber)
-            : base(Resources.FollowingProjectNumberAlreadyExist + Constants.Colon + Convert.ToString(projectNumber))
+            : base(Resources.Resources.Resources.Resources.FollowingProjectNumberAlreadyExist + Constants.Colon + Convert.ToString(projectNumber))
         {
 
         }

@@ -1,31 +1,79 @@
-﻿using NHibernate;
-using Repositories.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Repositories
 {
-    public class GenericRepository : IGenericRepository
+    public class GenericRepository<TEntity> where TEntity : class
     {
-        private IUnitOfWork unitOfWork;
+        private ProjectManagementContext _context;
+        private DbSet<TEntity> dbSet;
 
-        public GenericRepository(IUnitOfWork unitOfWork)
+        public GenericRepository(ProjectManagementContext context)
         {
-            this.unitOfWork = unitOfWork;
+            _context = context;
+            dbSet = _context.Set<TEntity>();
         }
 
-        public void Delete(object o)
+        public virtual IEnumerable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "")
         {
-            unitOfWork.Session.Delete(o);
+            IQueryable<TEntity> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
         }
 
-        public object Save(object o)
+        public virtual TEntity GetByID(object id)
         {
-            return unitOfWork.Session.Save(o);
+            return dbSet.Find(id);
         }
 
-        public void Update(object o)
+        public virtual void Insert(TEntity entity)
         {
-            unitOfWork.Session.Lock(o, LockMode.UpgradeNoWait);
-            unitOfWork.Session.Update(o);
+            dbSet.Add(entity);
+        }
+
+        public virtual void Delete(object id)
+        {
+            TEntity entityToDelete = dbSet.Find(id);
+            Delete(entityToDelete);
+        }
+
+        public virtual void Delete(TEntity entityToDelete)
+        {
+            if (_context.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+            }
+            dbSet.Remove(entityToDelete);
+        }
+
+        public virtual void Update(TEntity entityToUpdate)
+        {
+            dbSet.Attach(entityToUpdate);
+            _context.Entry(entityToUpdate).State = EntityState.Modified;
         }
     }
 }

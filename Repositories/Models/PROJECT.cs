@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace Repositories.Models
 {
-    public class PROJECT
+    public class Project
     {
-        public virtual long ID { get; set; }
-        public virtual int PROJECT_NUMBER { get; set; }
-        public virtual string NAME { get; set; }
-        public virtual string CUSTOMER { get; set; }
-        public virtual Status STATUS { get; set; }
-        public virtual DateTime START_DATE { get; set; }
-        public virtual DateTime? END_DATE { get; set; }
-        public virtual ISet<EMPLOYEE> EMPLOYEES { get; set; }
-        public virtual GROUPS GROUP { get; set; }
-        public virtual int VERSION { get; set; }
+        public long ID { get; set; }
+        public int PROJECT_NUMBER { get; set; }
+        public string NAME { get; set; }
+        public string CUSTOMER { get; set; }
+        public Status STATUS { get; set; }
+        public DateTime START_DATE { get; set; }
+        public DateTime? END_DATE { get; set; }
+        public virtual ISet<Employee> EMPLOYEES { get; set; }
+        public virtual Group GROUP { get; set; }
+        public int VERSION { get; set; }
     }
 }

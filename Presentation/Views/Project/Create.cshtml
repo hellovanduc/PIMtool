@@ -1,7 +1,7 @@
 ﻿@using Repositories.Models
 @using Repositories.Enums
 @using System.Linq
-@using Library.Resources.Resources
+@using Resources.Resources.Resources
 @using System.Globalization
 @model PIMTool.ViewModels.CreateProjectViewModel
 
@@ -12,16 +12,16 @@
 </div>
 <hr>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-<div id="new_project_form">
-@if (Model.Error != null)
-{
-    <div class="row alert alert-danger">
-        <p>@Model.Error</p>
-    </div>
-}
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <div id="new_project_form">
+    @if (Model.Error != null)
+    {
+        <div class="row alert alert-danger">
+            <p>@Model.Error</p>
+        </div>
+    }
     <div class="row form-group">
         @Html.HiddenFor(model => model.EditMode)
         @Html.HiddenFor(model => model.VERSION)

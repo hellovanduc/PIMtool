@@ -1,5 +1,5 @@
 ﻿
-namespace Library.Constants
+namespace Resources.Constants
 {
     public class Constants
     {

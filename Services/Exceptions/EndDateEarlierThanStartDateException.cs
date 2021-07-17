@@ -1,5 +1,4 @@
-﻿using Library.Resources.Resources;
-using System;
+﻿using System;
 
 namespace Services.Exceptions
 {
@@ -16,9 +15,9 @@ namespace Services.Exceptions
         }
         private static string CreateMessage(DateTime startDate, DateTime endDate)
         {
-            return $"{Resources.EndDateEalierThanStartDateError}; " +
-                $"{Resources.StartDate}: {startDate.ToShortDateString()}; " +
-                $"{Resources.EndDate}: {endDate.ToShortDateString()}";
+            return $"{Resources.Resources.Resources.Resources.EndDateEalierThanStartDateError}; " +
+                $"{Resources.Resources.Resources.Resources.StartDate}: {startDate.ToShortDateString()}; " +
+                $"{Resources.Resources.Resources.Resources.EndDate}: {endDate.ToShortDateString()}";
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using Library.Resources.Resources;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Repositories.Enums
 {
@@ -23,13 +21,13 @@ namespace Repositories.Enums
             switch (s)
             {
                 case Status.FIN:
-                    return Resources.StatusFIN;
+                    return Resources.Resources.Resources.Resources.StatusFIN;
                 case Status.INP:
-                    return Resources.StatusINP;
+                    return Resources.Resources.Resources.Resources.StatusINP;
                 case Status.PLA:
-                    return Resources.StatusPLA;
+                    return Resources.Resources.Resources.Resources.StatusPLA;
                 default:
-                    return Resources.StatusNEW;
+                    return Resources.Resources.Resources.Resources.StatusNEW;
             }
         }
 

@@ -1,77 +1,72 @@
-﻿using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Cfg.MappingSchema;
-using NHibernate.Mapping.ByCode;
-using Repositories.Interfaces;
+﻿using Repositories.Models;
 using System;
-using System.Reflection;
 
 namespace Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IDisposable
     {
-        private readonly ISessionFactory sessionFactory;
-        private ITransaction transaction;
-        private ISession session;
+        private ProjectManagementContext _context = new ProjectManagementContext();
+        private bool isDisposed = false;
+        private GenericRepository<Project> _projectRepository;
+        private GenericRepository<Group> _groupRepository;
+        private GenericRepository<Employee> _employeeRepository;
 
-        public ISession Session { get => session; }
-
-        public UnitOfWork()
-        {
-            //  Configure mapping
-            var config = new Configuration().Configure();
-            var mapping = GetMappings();
-            config.AddDeserializedMapping(mapping, null);
-
-            //  Create session factory
-            sessionFactory = config.BuildSessionFactory();
+        private ProjectManagementContext Context { 
+            get {
+                if (isDisposed)
+                {
+                    _context = new ProjectManagementContext();
+                }
+                return _context; 
+            } 
         }
 
-        private HbmMapping GetMappings()
+        public GenericRepository<Project> ProjectRepository
         {
-            var mapper = new ModelMapper();
-
-            mapper.AddMappings(Assembly.GetExecutingAssembly().GetExportedTypes());
-            var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-
-            return mapping;
+            get
+            {
+                if (_projectRepository == null)
+                {
+                    _projectRepository = new GenericRepository<Project>(Context);
+                }
+                return _projectRepository;
+            }
         }
 
+        public GenericRepository<Employee> EmployeeRepository
+        {
+            get
+            {
 
-        public IUnitOfWork Start()
-        {
-            if (session == null || session.IsOpen == false)
-            {
-                session = sessionFactory.OpenSession();
+                if (_employeeRepository == null)
+                {
+                    _employeeRepository = new GenericRepository<Employee>(Context);
+                }
+                return _employeeRepository;
             }
-            if (transaction == null || transaction.IsActive == false)
-            {
-                transaction = session.BeginTransaction();
-            }
-            return this;
         }
-        public void Commit()
+
+        public GenericRepository<Group> GroupRepository
         {
-            try
+            get
             {
-                transaction.Commit();
+                if (_groupRepository == null)
+                {
+                    _groupRepository = new GenericRepository<Group>(Context);
+                }
+                return _groupRepository;
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            if (transaction != null && transaction.IsActive == true)
-            {
-                transaction.Dispose();
-            }
-            if (session != null && session.IsOpen)
-            {
-                session.Dispose();
-            }
+            _context.Dispose();
+            isDisposed = true;
         }
     }
 }

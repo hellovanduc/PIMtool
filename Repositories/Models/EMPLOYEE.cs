@@ -2,13 +2,13 @@
 
 namespace Repositories.Models
 {
-    public class EMPLOYEE
+    public class Employee
     {
-        public virtual long ID { get; set; }
-        public virtual string VISA { get; set; }
-        public virtual string FIRST_NAME { get; set; }
-        public virtual string LAST_NAME { get; set; }
-        public virtual DateTime BIRTH_DATE { get; set; }
-        public virtual int VERSION { get; set; }
+        public long ID { get; set; }
+        public string VISA { get; set; }
+        public string FIRST_NAME { get; set; }
+        public string LAST_NAME { get; set; }
+        public DateTime BIRTH_DATE { get; set; }
+        public int VERSION { get; set; }
     }
 }

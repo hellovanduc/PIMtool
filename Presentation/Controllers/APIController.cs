@@ -1,5 +1,4 @@
-﻿using Library.Resources.Resources;
-using Repositories.Models;
+﻿using Repositories.Models;
 using Services.Interfaces;
 using System.Web.Mvc;
 
@@ -18,10 +17,10 @@ namespace PIMTool.Controllers
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
-            PROJECT project = service.FindProjectByProjectNumber(PROJECT_NUMBER);
+            Project project = service.FindProjectByProjectNumber(PROJECT_NUMBER);
             if (project != null)
             {
-                return Json(Resources.ProjectNumberAlreadyExist, JsonRequestBehavior.AllowGet);
+                return Json(Resources.Resources.Resources.Resources.ProjectNumberAlreadyExist, JsonRequestBehavior.AllowGet);
             }
             else
             {

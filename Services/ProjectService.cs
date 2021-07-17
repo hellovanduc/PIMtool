@@ -1,6 +1,5 @@
-﻿using Library.Resources.Resources;
+﻿using Repositories;
 using Repositories.Enums;
-using Repositories.Interfaces;
 using Repositories.Models;
 using Services.Exceptions;
 using Services.Interfaces;
@@ -12,25 +11,14 @@ namespace Services
 {
     public class ProjectService : IProjectService
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IGenericRepository genericRepository;
-        private readonly IProjectRepository projectRepository;
-        private readonly IEmployeeRepository employeeRepository;
-        private readonly IGroupRepository groupRepository;
-        public ProjectService(
-            IUnitOfWork unitOfWork,
-            IGenericRepository genericRepository,
-            IProjectRepository projectRepository,
-            IEmployeeRepository employeeRepository,
-            IGroupRepository groupRepository)
+        private readonly UnitOfWork _unitOfWork;
+        
+        public ProjectService()
         {
-            this.unitOfWork = unitOfWork;
-            this.genericRepository = genericRepository;
-            this.projectRepository = projectRepository;
-            this.groupRepository = groupRepository;
-            this.employeeRepository = employeeRepository;
+            _unitOfWork = new UnitOfWork();
         }
-        public PROJECT CreateProject(PROJECT project)
+
+        public Project CreateProject(Project project)
         {
             if (FindProjectByProjectNumber(project.PROJECT_NUMBER) != null)
             {
@@ -53,10 +41,10 @@ namespace Services
                 throw new EndDateEarlierThanStartDateException(project.START_DATE, (DateTime)project.END_DATE);
             }
 
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                genericRepository.Save(project);
-                unitOfWork.Commit();
+                _unitOfWork.ProjectRepository.Insert(project);
+                _unitOfWork.Save();
             }
 
             return project;
@@ -67,7 +55,7 @@ namespace Services
         /// </summary>
         /// <param name="employees"></param>
         /// <returns>List of invalid visas in set employees. Return null if the set employees is null or no invalid visas is founded</returns>
-        private List<string> FindInvalidVisas(ISet<EMPLOYEE> employees)
+        private List<string> FindInvalidVisas(ISet<Employee> employees)
         {
             if (employees == null)
             {
@@ -83,7 +71,7 @@ namespace Services
             }
 
             //  Find the employees corresponding with list visas
-            IList<EMPLOYEE> foundedEmployees = FindEmployeesByVisas(visas);
+            IList<Employee> foundedEmployees = FindEmployeesByVisas(visas);
 
             //  If the number of employees is founded less than the number of employees in set employees, find the invalid visas
             if (foundedEmployees.Count < employees.Count)
@@ -100,13 +88,13 @@ namespace Services
             return invalidVisas;
         }
 
-        public IList<PROJECT> FindAllProjects()
+        public IList<Project> FindAllProjects()
         {
-            IList<PROJECT> projects;
+            IList<Project> projects;
 
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                projects = projectRepository.FindAllProjects();
+                projects = _unitOfWork.ProjectRepository.Get().ToList();
             }
 
             foreach (var project in projects)
@@ -118,23 +106,31 @@ namespace Services
             return projects;
         }
 
-        public IList<PROJECT> FindAllProjects(string searchString, string projectStatus, string sortOrder)
+        public IList<Project> FindAllProjects(string searchString, string projectStatus, string sortOrder)
         {
-            IList<PROJECT> projects;
-            using (unitOfWork.Start())
+            IList<Project> projects;
+            using (_unitOfWork)
             {
                 searchString = searchString.ToLower();
+                Status searchStatus = StatusHelper.StringToStatus(projectStatus);
                 try
                 {
                     //  If searchString can convert to an integer, we can compare it with PROJECT_NUMBER to filter the result
                     int searchNumber = Convert.ToInt32(searchString);
 
-                    projects = projectRepository.FindAllProjects(searchString, projectStatus, searchNumber);
+                    projects = _unitOfWork.ProjectRepository
+                        .Get(x => x.PROJECT_NUMBER == searchNumber
+                                || x.NAME == searchString
+                                || x.STATUS == searchStatus)
+                        .ToList();
                 }
                 catch (FormatException)
                 {
                     //  If searchString cannot convert to an integer, we will not check PROJECT_NUMBER of the project
-                    projects = projectRepository.FindAllProjects(searchString, projectStatus);
+                    projects = _unitOfWork.ProjectRepository
+                        .Get(x => x.NAME == searchString
+                                || x.STATUS == searchStatus)
+                        .ToList();
                 }
             }
 
@@ -143,39 +139,41 @@ namespace Services
             return projects;
         }
 
-        public IList<EMPLOYEE> FindAllEmployees()
+        public IList<Employee> FindAllEmployees()
         {
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                var employees = employeeRepository.FindAllEmployees();
-                unitOfWork.Commit();
+                var employees = _unitOfWork.EmployeeRepository.Get().ToList();
+                _unitOfWork.Save();
 
                 return employees;
             }
         }
 
-        public IList<GROUPS> FindAllGroups()
+        public IList<Group> FindAllGroups()
         {
-            IList<GROUPS> groups;
+            IList<Group> groups;
 
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                groups = groupRepository.FindAllGroups();
+                groups = _unitOfWork.GroupRepository.Get().ToList();
             }
 
             return groups;
         }
 
-        public PROJECT FindProjectByProjectNumber(int projectNumber)
+        public Project FindProjectByProjectNumber(int projectNumber)
         {
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                var project = projectRepository.FindProjectByProjectNumber(projectNumber);
+                var project = _unitOfWork.ProjectRepository
+                    .Get(x => x.PROJECT_NUMBER == projectNumber)
+                    .FirstOrDefault();
                 return project;
             }
         }
 
-        public PROJECT UpdateProjectByProjectNumber(int projectNumber, PROJECT newProject)
+        public Project UpdateProjectByProjectNumber(int projectNumber, Project newProject)
         {
             List<string> invalidVisas = FindInvalidVisas(newProject.EMPLOYEES);
             if (invalidVisas != null)
@@ -193,20 +191,21 @@ namespace Services
                 throw new EndDateEarlierThanStartDateException(newProject.START_DATE, (DateTime)newProject.END_DATE);
             }
 
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                var project = projectRepository.FindProjectByProjectNumber(projectNumber);
+                var project = _unitOfWork.ProjectRepository.Get(x => x.PROJECT_NUMBER == projectNumber)
+                                .FirstOrDefault();
                 if (project == null || newProject == null) return null;
 
                 AssignProject(project, newProject);
 
                 if (project.VERSION != newProject.VERSION)
                 {
-                    throw new ObjectHasBeenModifiedException(Resources.StaleProjectError + project.PROJECT_NUMBER);
+                    throw new ObjectHasBeenModifiedException(Resources.Resources.Resources.Resources.StaleProjectError + project.PROJECT_NUMBER);
                 }
 
-                genericRepository.Update(project);
-                unitOfWork.Commit();
+                _unitOfWork.ProjectRepository.Update(project);
+                _unitOfWork.Save();
 
                 return project;
             }
@@ -217,7 +216,7 @@ namespace Services
         /// </summary>
         /// <param name="target"></param>
         /// <param name="source"></param>
-        private void AssignProject(PROJECT target, PROJECT source)
+        private void AssignProject(Project target, Project source)
         {
             target.NAME = source.NAME;
             target.CUSTOMER = source.CUSTOMER;
@@ -234,34 +233,53 @@ namespace Services
             {
                 return 0;
             }
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                int count = projectRepository.DeleteProjectsByProjectNumbers(projectNumbers);
-                unitOfWork.Commit();
+                int count = 0;
+                foreach (int projectNumber in projectNumbers)
+                {
+                    Project project = _unitOfWork.ProjectRepository.Get(x => x.PROJECT_NUMBER == projectNumber)
+                        .FirstOrDefault();
+                    if (project != null)
+                    {
+                        _unitOfWork.ProjectRepository.Delete(project);
+                        count++;
+                    }
+                }
+                _unitOfWork.Save();
                 return count;
             }
         }
 
-        public IList<EMPLOYEE> FindEmployeesByVisas(List<string> visas)
+        public IList<Employee> FindEmployeesByVisas(List<string> visas)
         {
             if (visas == null)
             {
                 return null;
             }
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                var employees = employeeRepository.FindEmployeesByVisas(visas);
+                IList<Employee> employees = new List<Employee>();
+
+                foreach (string visa in visas)
+                {
+                    Employee employee = _unitOfWork.EmployeeRepository.Get(x => x.VISA == visa)
+                        .FirstOrDefault();
+                    if (employee != null)
+                    {
+                        employees.Add(employee);
+                    }
+                }
 
                 return employees;
             }
         }
 
-        public GROUPS FindGroupByName(string name)
+        public Group FindGroupByName(string name)
         {
-            using (unitOfWork.Start())
+            using (_unitOfWork)
             {
-                var group = groupRepository.FindGroupByName(name);
-
+                var group = _unitOfWork.GroupRepository.Get(x => x.NAME == name).FirstOrDefault();
                 return group;
             }
         }
@@ -272,7 +290,7 @@ namespace Services
         /// <param name="projects"></param>
         /// <param name="sortOrder"></param>
         /// <returns></returns>
-        private IList<PROJECT> SortProjects(IList<PROJECT> projects, string sortOrder)
+        private IList<Project> SortProjects(IList<Project> projects, string sortOrder)
         {
             var order = SortOrderHelper.StringToSortOrder(sortOrder);
 

@@ -16,3 +16,9 @@ Parameter name: parameters
 Parameter name: parameters
 2021-06-10 14:28:21,233 [5] ERROR: Encountered end tag "div" with no matching start tag.  Are your start/end tags properly balanced?
 
+2021-06-16 08:24:22,642 [8] ERROR: E:\Documents\Git-repo\PIMTool\Presentation\Views\Project\Index.cshtml(4): error CS0246: The type or namespace name 'Library' could not be found (are you missing a using directive or an assembly reference?)
+2021-06-16 08:36:00,178 [37] ERROR: The following project number already exists: 1004
+2021-07-16 00:17:55,008 [9] ERROR: LINQ to Entities does not recognize the method 'Repositories.Enums.Status StringToStatus(System.String)' method, and this method cannot be translated into a store expression.
+2021-07-16 00:21:31,862 [8] ERROR: C:\Users\nguye\AppData\Local\Temp\Temporary ASP.NET Files\vs\6ee8258a\39d681a1\App_Web_index.cshtml.2a617771.qvglhtbt.0.cs(72): error CS0246: The type or namespace name 'PROJECT' could not be found (are you missing a using directive or an assembly reference?)
+2021-07-16 00:22:55,005 [14] ERROR: The operation cannot be completed because the DbContext has been disposed.
+2021-07-16 00:27:37,500 [13] ERROR: The operation cannot be completed because the DbContext has been disposed.
