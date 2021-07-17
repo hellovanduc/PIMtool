@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Repositories.Models
 {
@@ -10,5 +11,6 @@ namespace Repositories.Models
         public string LAST_NAME { get; set; }
         public DateTime BIRTH_DATE { get; set; }
         public int VERSION { get; set; }
+        virtual public ISet<Project> PROJECTS { get; set; }
     }
 }

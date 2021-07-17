@@ -8,7 +8,8 @@ namespace Repositories
     {
         public ProjectManagementContext() : base("ProjectManagementContext")
         {
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ProjectManagementContext,
+                Migrations.Configuration>());
         }
 
         public DbSet<Employee> Employees { get; set; }
@@ -19,6 +20,9 @@ namespace Repositories
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Group>()
+                .HasRequired(x => x.GROUP_LEADER);
         }
     }
 }
