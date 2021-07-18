@@ -13,10 +13,10 @@ namespace Repositories.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PIMdbEntities : DbContext
+    public partial class ProjectManagementContainer : DbContext
     {
-        public PIMdbEntities()
-            : base("name=PIMdbEntities")
+        public ProjectManagementContainer()
+            : base("name=ProjectManagementContainer")
         {
         }
     
@@ -25,9 +25,8 @@ namespace Repositories.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
-        public virtual DbSet<GROUP> GROUPS { get; set; }
-        public virtual DbSet<PROJECT> PROJECTs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
     }
 }

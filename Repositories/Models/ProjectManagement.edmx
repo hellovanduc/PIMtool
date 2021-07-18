@@ -4,314 +4,275 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PIMdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="EMPLOYEE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="VERSION" Type="numeric" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="VISA" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="FIRST_NAME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LAST_NAME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="BIRTH_DATE" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="GROUPS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="VERSION" Type="numeric" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="GROUP_LEADER" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PROJECT">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="VERSION" Type="numeric" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="PROJECT_NUMBER" Type="numeric" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CUSTOMER" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="STATUS" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="START_DATE" Type="date" Nullable="false" />
-          <Property Name="END_DATE" Type="date" />
-          <Property Name="GROUP_ID" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PROJECT_EMPLOYEE">
-          <Key>
-            <PropertyRef Name="EMPLOYEE_ID" />
-            <PropertyRef Name="PROJECT_ID" />
-          </Key>
-          <Property Name="EMPLOYEE_ID" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="PROJECT_ID" Type="numeric" Precision="19" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <Association Name="FK_7CDD80D4">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="GROUPS" Type="Self.GROUPS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GROUPS">
-              <PropertyRef Name="GROUP_LEADER" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_8F05E814">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="PROJECT_EMPLOYEE" Type="Self.PROJECT_EMPLOYEE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROJECT_EMPLOYEE">
-              <PropertyRef Name="PROJECT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_E293153D">
-          <End Role="GROUPS" Type="Self.GROUPS" Multiplicity="1" />
-          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GROUPS">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROJECT">
-              <PropertyRef Name="GROUP_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FD4F6DBA">
-          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
-          <End Role="PROJECT_EMPLOYEE" Type="Self.PROJECT_EMPLOYEE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PROJECT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROJECT_EMPLOYEE">
-              <PropertyRef Name="EMPLOYEE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="PIMdbModelStoreContainer">
-          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GROUPS" EntityType="Self.GROUPS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PROJECT" EntityType="Self.PROJECT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PROJECT_EMPLOYEE" EntityType="Self.PROJECT_EMPLOYEE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_7CDD80D4" Association="Self.FK_7CDD80D4">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="GROUPS" EntitySet="GROUPS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_8F05E814" Association="Self.FK_8F05E814">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
-            <End Role="PROJECT_EMPLOYEE" EntitySet="PROJECT_EMPLOYEE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_E293153D" Association="Self.FK_E293153D">
-            <End Role="GROUPS" EntitySet="GROUPS" />
-            <End Role="PROJECT" EntitySet="PROJECT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FD4F6DBA" Association="Self.FK_FD4F6DBA">
-            <End Role="PROJECT" EntitySet="PROJECT" />
-            <End Role="PROJECT_EMPLOYEE" EntitySet="PROJECT_EMPLOYEE" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="ProjectManagement.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ProjectManagementStoreContainer">
+    <EntitySet Name="Employees" EntityType="ProjectManagement.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="ProjectManagement.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projects" EntityType="ProjectManagement.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeProject" EntityType="ProjectManagement.Store.EmployeeProject" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="GroupEmployee" Association="ProjectManagement.Store.GroupEmployee">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectGroup" Association="ProjectManagement.Store.ProjectGroup">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Group" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeProject_Employee" Association="ProjectManagement.Store.FK_EmployeeProject_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeProject" EntitySet="EmployeeProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeProject_Project" Association="ProjectManagement.Store.FK_EmployeeProject_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="EmployeeProject" EntitySet="EmployeeProject" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Visa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Version" Type="decimal" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Group_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Version" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Version" Type="decimal" Nullable="false" />
+    <Property Name="ProjectNumber" Type="decimal" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Customer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="true" />
+    <Property Name="Group_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeProject">
+    <Key>
+      <PropertyRef Name="Employees_Id" />
+      <PropertyRef Name="Projects_Id" />
+    </Key>
+    <Property Name="Employees_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Projects_Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="GroupEmployee">
+    <End Role="Group" Type="ProjectManagement.Store.Groups" Multiplicity="1" />
+    <End Role="Employee" Type="ProjectManagement.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectGroup">
+    <End Role="Project" Type="ProjectManagement.Store.Projects" Multiplicity="*" />
+    <End Role="Group" Type="ProjectManagement.Store.Groups" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="Group_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeProject_Employee">
+    <End Role="Employee" Type="ProjectManagement.Store.Employees" Multiplicity="1" />
+    <End Role="EmployeeProject" Type="ProjectManagement.Store.EmployeeProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeProject">
+        <PropertyRef Name="Employees_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeProject_Project">
+    <End Role="EmployeeProject" Type="ProjectManagement.Store.EmployeeProject" Multiplicity="*" />
+    <End Role="Project" Type="ProjectManagement.Store.Projects" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeProject">
+        <PropertyRef Name="Projects_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PIMdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="EMPLOYEE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="VERSION" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="VISA" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="FIRST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LAST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BIRTH_DATE" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="GROUPS" Relationship="Self.FK_7CDD80D4" FromRole="EMPLOYEE" ToRole="GROUPS" />
-          <NavigationProperty Name="PROJECTs" Relationship="Self.PROJECT_EMPLOYEE" FromRole="EMPLOYEE" ToRole="PROJECT" />
-        </EntityType>
-        <EntityType Name="GROUP">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="VERSION" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="GROUP_LEADER" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
-          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_7CDD80D4" FromRole="GROUPS" ToRole="EMPLOYEE" />
-          <NavigationProperty Name="PROJECTs" Relationship="Self.FK_E293153D" FromRole="GROUPS" ToRole="PROJECT" />
-        </EntityType>
-        <EntityType Name="PROJECT">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
-          <Property Name="VERSION" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="PROJECT_NUMBER" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CUSTOMER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="STATUS" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="START_DATE" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="END_DATE" Type="DateTime" Precision="0" />
-          <Property Name="GROUP_ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
-          <NavigationProperty Name="GROUP" Relationship="Self.FK_E293153D" FromRole="PROJECT" ToRole="GROUPS" />
-          <NavigationProperty Name="EMPLOYEEs" Relationship="Self.PROJECT_EMPLOYEE" FromRole="PROJECT" ToRole="EMPLOYEE" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_7CDD80D4">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
-          <End Role="GROUPS" Type="Self.GROUP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLOYEE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GROUPS">
-              <PropertyRef Name="GROUP_LEADER" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_E293153D">
-          <End Role="GROUPS" Type="Self.GROUP" Multiplicity="1" />
-          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GROUPS">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PROJECT">
-              <PropertyRef Name="GROUP_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PROJECT_EMPLOYEE">
-          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
-          <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="PIMdbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
-          <EntitySet Name="GROUPS" EntityType="Self.GROUP" />
-          <EntitySet Name="PROJECTs" EntityType="Self.PROJECT" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_7CDD80D4" Association="Self.FK_7CDD80D4">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="GROUPS" EntitySet="GROUPS" />
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ProjectManagement" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ProjectManagementContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="ProjectManagement.Employee" />
+          <EntitySet Name="Groups" EntityType="ProjectManagement.Group" />
+          <EntitySet Name="Projects" EntityType="ProjectManagement.Project" />
+          <AssociationSet Name="GroupEmployee" Association="ProjectManagement.GroupEmployee">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_E293153D" Association="Self.FK_E293153D">
-            <End Role="GROUPS" EntitySet="GROUPS" />
-            <End Role="PROJECT" EntitySet="PROJECTs" />
+          <AssociationSet Name="ProjectGroup" Association="ProjectManagement.ProjectGroup">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Group" EntitySet="Groups" />
           </AssociationSet>
-          <AssociationSet Name="PROJECT_EMPLOYEE" Association="Self.PROJECT_EMPLOYEE">
-            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
-            <End Role="PROJECT" EntitySet="PROJECTs" />
+          <AssociationSet Name="EmployeeProject" Association="ProjectManagement.EmployeeProject">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Project" EntitySet="Projects" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Visa" Type="String" Nullable="false" />
+          <Property Name="Version" Type="Decimal" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="ProjectManagement.GroupEmployee" FromRole="Employee" ToRole="Group" />
+          <NavigationProperty Name="Projects" Relationship="ProjectManagement.EmployeeProject" FromRole="Employee" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="GroupLeader" Relationship="ProjectManagement.GroupEmployee" FromRole="Group" ToRole="Employee" />
+          <NavigationProperty Name="Projects" Relationship="ProjectManagement.ProjectGroup" FromRole="Group" ToRole="Project" />
+          <Property Name="Version" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Version" Type="Decimal" Nullable="false" />
+          <Property Name="ProjectNumber" Type="Decimal" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Customer" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="Group" Relationship="ProjectManagement.ProjectGroup" FromRole="Project" ToRole="Group" />
+          <NavigationProperty Name="Employees" Relationship="ProjectManagement.EmployeeProject" FromRole="Project" ToRole="Employee" />
+        </EntityType>
+        <Association Name="GroupEmployee">
+          <End Type="ProjectManagement.Group" Role="Group" Multiplicity="1" />
+          <End Type="ProjectManagement.Employee" Role="Employee" Multiplicity="0..1" />
+        </Association>
+        <Association Name="ProjectGroup">
+          <End Type="ProjectManagement.Project" Role="Project" Multiplicity="*" />
+          <End Type="ProjectManagement.Group" Role="Group" Multiplicity="1" />
+        </Association>
+        <Association Name="EmployeeProject">
+          <End Type="ProjectManagement.Employee" Role="Employee" Multiplicity="*" />
+          <End Type="ProjectManagement.Project" Role="Project" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PIMdbModelStoreContainer" CdmEntityContainer="PIMdbEntities">
-          <EntitySetMapping Name="EMPLOYEEs">
-            <EntityTypeMapping TypeName="PIMdbModel.EMPLOYEE">
-              <MappingFragment StoreEntitySet="EMPLOYEE">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="VISA" ColumnName="VISA" />
-                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
-                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
-                <ScalarProperty Name="BIRTH_DATE" ColumnName="BIRTH_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GROUPS">
-            <EntityTypeMapping TypeName="PIMdbModel.GROUP">
-              <MappingFragment StoreEntitySet="GROUPS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="GROUP_LEADER" ColumnName="GROUP_LEADER" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PROJECTs">
-            <EntityTypeMapping TypeName="PIMdbModel.PROJECT">
-              <MappingFragment StoreEntitySet="PROJECT">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="PROJECT_NUMBER" ColumnName="PROJECT_NUMBER" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="CUSTOMER" ColumnName="CUSTOMER" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-                <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
-                <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
-                <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PIMdbModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="PROJECT_EMPLOYEE" TypeName="PIMdbModel.PROJECT_EMPLOYEE" StoreEntitySet="PROJECT_EMPLOYEE">
-            <EndProperty Name="EMPLOYEE">
-              <ScalarProperty Name="ID" ColumnName="PROJECT_ID" />
-            </EndProperty>
-            <EndProperty Name="PROJECT">
-              <ScalarProperty Name="ID" ColumnName="EMPLOYEE_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectManagementStoreContainer" CdmEntityContainer="ProjectManagementContainer">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectManagement.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Visa" ColumnName="Visa" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectManagement.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectManagement.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ProjectNumber" ColumnName="ProjectNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GroupEmployee" TypeName="ProjectManagement.GroupEmployee" StoreEntitySet="Employees">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectGroup" TypeName="ProjectManagement.ProjectGroup" StoreEntitySet="Projects">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EmployeeProject" TypeName="ProjectManagement.EmployeeProject" StoreEntitySet="EmployeeProject">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="Employees_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Projects_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <Connection>
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
+    </edmx:Connection>
+    <edmx:Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
-    </Options>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
-  </Designer>
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
 </edmx:Edmx>

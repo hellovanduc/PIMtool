@@ -12,21 +12,20 @@ namespace Repositories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GROUP
+    public partial class Group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GROUP()
+        public Group()
         {
-            this.PROJECTs = new HashSet<PROJECT>();
+            this.Projects = new HashSet<Project>();
         }
     
-        public decimal ID { get; set; }
-        public decimal VERSION { get; set; }
-        public string NAME { get; set; }
-        public decimal GROUP_LEADER { get; set; }
+        public System.Guid Id { get; set; }
+        public string Name { get; set; }
+        public decimal Version { get; set; }
     
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual Employee GroupLeader { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROJECT> PROJECTs { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

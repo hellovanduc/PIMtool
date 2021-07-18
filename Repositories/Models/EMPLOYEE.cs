@@ -12,25 +12,23 @@ namespace Repositories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EMPLOYEE
+    public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EMPLOYEE()
+        public Employee()
         {
-            this.GROUPS = new HashSet<GROUP>();
-            this.PROJECTs = new HashSet<PROJECT>();
+            this.Projects = new HashSet<Project>();
         }
     
-        public decimal ID { get; set; }
-        public decimal VERSION { get; set; }
-        public string VISA { get; set; }
-        public string FIRST_NAME { get; set; }
-        public string LAST_NAME { get; set; }
-        public System.DateTime BIRTH_DATE { get; set; }
+        public System.Guid Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Visa { get; set; }
+        public decimal Version { get; set; }
+        public System.DateTime BirthDate { get; set; }
     
+        public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GROUP> GROUPS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROJECT> PROJECTs { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

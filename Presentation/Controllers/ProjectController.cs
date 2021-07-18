@@ -69,16 +69,16 @@ namespace PIMTool.Controllers
         {
             if (ModelState.IsValid)
             {
-                PROJECT project = new PROJECT
+                Project project = new Project
                 {
-                    PROJECT_NUMBER = viewModel.PROJECT_NUMBER,
-                    CUSTOMER = viewModel.CUSTOMER,
-                    NAME = viewModel.NAME,
-                    START_DATE = viewModel.START_DATE,
-                    END_DATE = viewModel.END_DATE,
-                    GROUP = service.FindGroupByName(viewModel.GROUP),
-                    EMPLOYEEs = (viewModel.MEMBERS == null) ? null : service.FindEmployeesByVisas(viewModel.MEMBERS).ToHashSet(),
-                    STATUS = viewModel.STATUS
+                    ProjectNumber = viewModel.PROJECT_NUMBER,
+                    Customer = viewModel.CUSTOMER,
+                    Name = viewModel.NAME,
+                    StartDate = viewModel.START_DATE,
+                    EndDate = viewModel.END_DATE,
+                    Group = service.FindGroupByName(viewModel.GROUP),
+                    Employees = (viewModel.MEMBERS == null) ? null : service.FindEmployeesByVisas(viewModel.MEMBERS).ToHashSet(),
+                    Status = viewModel.STATUS
                 };
                 service.CreateProject(project);
 
@@ -106,22 +106,22 @@ namespace PIMTool.Controllers
             ViewBag.Groups = service.FindAllGroups();
             ViewBag.Employees = service.FindAllEmployees();
 
-            PROJECT project = service.FindProjectByProjectNumber(id);
+            Project project = service.FindProjectByProjectNumber(id);
             CreateProjectViewModel viewModel = new CreateProjectViewModel
             {
-                PROJECT_NUMBER = project.PROJECT_NUMBER,
-                CUSTOMER = project.CUSTOMER,
-                NAME = project.NAME,
-                START_DATE = project.START_DATE,
-                END_DATE = project.END_DATE,
-                STATUS = project.STATUS.ToString(),
-                GROUP = project.GROUP.NAME,
-                MEMBERS = project.EMPLOYEEs.Select(m => m.VISA).ToList(),
+                PROJECT_NUMBER = project.ProjectNumber,
+                CUSTOMER = project.Customer,
+                NAME = project.Name,
+                START_DATE = project.StartDate,
+                END_DATE = project.EndDate,
+                STATUS = project.Status.ToString(),
+                GROUP = project.Group.Name,
+                MEMBERS = project.Employees.Select(m => m.Visa).ToList(),
                 AllEmployees = CreateMultiSelectListEmployees(),
                 AllGroups = CreateSelectListGroup(),
                 AllStatus = CreateSelectListStatus(),
                 EditMode = true,
-                VERSION = project.VERSION
+                VERSION = project.Version
             };
 
             return View("Create", viewModel);
@@ -133,20 +133,20 @@ namespace PIMTool.Controllers
         {
             if (ModelState.IsValid)
             {
-                PROJECT project = new PROJECT
+                Project project = new Project
                 {
-                    PROJECT_NUMBER = viewModel.PROJECT_NUMBER,
-                    CUSTOMER = viewModel.CUSTOMER,
-                    NAME = viewModel.NAME,
-                    START_DATE = viewModel.START_DATE,
-                    END_DATE = viewModel.END_DATE,
-                    GROUP = service.FindGroupByName(viewModel.GROUP),
-                    EMPLOYEEs = (viewModel.MEMBERS == null) ? null : service.FindEmployeesByVisas(viewModel.MEMBERS).ToHashSet(),
-                    STATUS = viewModel.STATUS,
-                    VERSION = viewModel.VERSION
+                    ProjectNumber = viewModel.PROJECT_NUMBER,
+                    Customer = viewModel.CUSTOMER,
+                    Name = viewModel.NAME,
+                    StartDate = viewModel.START_DATE,
+                    EndDate = viewModel.END_DATE,
+                    Group = service.FindGroupByName(viewModel.GROUP),
+                    Employees = (viewModel.MEMBERS == null) ? null : service.FindEmployeesByVisas(viewModel.MEMBERS).ToHashSet(),
+                    Status = viewModel.STATUS,
+                    Version = viewModel.VERSION
                 };
 
-                service.UpdateProjectByProjectNumber(project.PROJECT_NUMBER, project);
+                service.UpdateProjectByProjectNumber(project.ProjectNumber, project);
 
                 var routes = new RouteValueDictionary();
                 routes.Add("searchString", Session["searchString"]);
@@ -188,8 +188,8 @@ namespace PIMTool.Controllers
         {
             IEnumerable<SelectListItem> allEmployees = new List<SelectListItem>(service.FindAllEmployees().Select(e => new SelectListItem
             {
-                Value = e.VISA,
-                Text = $"{e.VISA}: {e.FIRST_NAME} {e.LAST_NAME}"
+                Value = e.Visa,
+                Text = $"{e.Visa}: {e.FirstName} {e.LastName}"
             }));
 
             return new MultiSelectList(allEmployees.OrderBy(e => e.Text), "Value", "Text");
@@ -199,8 +199,8 @@ namespace PIMTool.Controllers
         {
             IEnumerable<SelectListItem> allGroups = new List<SelectListItem>(service.FindAllGroups().Select(g => new SelectListItem
             {
-                Value = g.NAME,
-                Text = $"{g.NAME}"
+                Value = g.Name,
+                Text = $"{g.Name}"
             }));
 
             return new SelectList(allGroups.OrderBy(g => g.Text), "Value", "Text");

@@ -1,60 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PIMdbModelStoreContainer" CdmEntityContainer="PIMdbEntities">
-    <EntitySetMapping Name="EMPLOYEEs">
-      <EntityTypeMapping TypeName="PIMdbModel.EMPLOYEE">
-        <MappingFragment StoreEntitySet="EMPLOYEE">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-          <ScalarProperty Name="VISA" ColumnName="VISA" />
-          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
-          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
-          <ScalarProperty Name="BIRTH_DATE" ColumnName="BIRTH_DATE" />
+  <EntityContainerMapping StorageEntityContainer="ProjectManagementStoreContainer" CdmEntityContainer="ProjectManagementContainer">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectManagement.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Visa" ColumnName="Visa" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GROUPS">
-      <EntityTypeMapping TypeName="PIMdbModel.GROUP">
-        <MappingFragment StoreEntitySet="GROUPS">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="GROUP_LEADER" ColumnName="GROUP_LEADER" />
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectManagement.Group)">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PROJECTs">
-      <EntityTypeMapping TypeName="PIMdbModel.PROJECT">
-        <MappingFragment StoreEntitySet="PROJECT">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-          <ScalarProperty Name="PROJECT_NUMBER" ColumnName="PROJECT_NUMBER" />
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="CUSTOMER" ColumnName="CUSTOMER" />
-          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-          <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
-          <ScalarProperty Name="END_DATE" ColumnName="END_DATE" />
-          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectManagement.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ProjectNumber" ColumnName="ProjectNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="PIMdbModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="PROJECT_EMPLOYEE" TypeName="PIMdbModel.PROJECT_EMPLOYEE" StoreEntitySet="PROJECT_EMPLOYEE">
-      <EndProperty Name="EMPLOYEE">
-        <ScalarProperty Name="ID" ColumnName="PROJECT_ID" />
+    <AssociationSetMapping Name="GroupEmployee" TypeName="ProjectManagement.GroupEmployee" StoreEntitySet="Employees">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
       </EndProperty>
-      <EndProperty Name="PROJECT">
-        <ScalarProperty Name="ID" ColumnName="EMPLOYEE_ID" />
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectGroup" TypeName="ProjectManagement.ProjectGroup" StoreEntitySet="Projects">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="Group_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EmployeeProject" TypeName="ProjectManagement.EmployeeProject" StoreEntitySet="EmployeeProject">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="Employees_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Projects_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

@@ -3,3 +3,5 @@
 2021-07-18 09:43:35,802 [11] ERROR: C:\Users\nguye\AppData\Local\Temp\Temporary ASP.NET Files\vs\6ee8258a\39d681a1\App_Web_index.cshtml.2a617771.s5ddddzk.0.cs(72): error CS0246: The type or namespace name 'Project' could not be found (are you missing a using directive or an assembly reference?)
 2021-07-18 09:44:40,382 [7] ERROR: D:\Documents\Git-repo\PIMTool\Presentation\Views\Project\Index.cshtml(68): error CS0019: Operator '!=' cannot be applied to operands of type 'string' and 'Status'
 2021-07-18 09:46:50,052 [11] ERROR: The operation cannot be completed because the DbContext has been disposed.
+2021-07-18 13:37:41,267 [5] ERROR: No connection string named 'ProjectManagementContainer' could be found in the application config file.
+2021-07-18 13:38:27,362 [8] ERROR: An error occurred while executing the command definition. See the inner exception for details.

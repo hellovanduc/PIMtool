@@ -17,7 +17,7 @@ namespace PIMToolTest
         [Test]
         public void Initialize()
         {
-            IList<EMPLOYEE> employees = new List<EMPLOYEE>();
+            IList<Employee> employees = new List<Employee>();
             employees.Add(NewEmployee("AAA", "Nguyen", "Van Duc", new DateTime(2000, 3, 26)));
             employees.Add(NewEmployee("BBB", "Tran", "Van Duc", new DateTime(2000, 3, 26)));
             employees.Add(NewEmployee("CCC", "Le", "Van Duc", new DateTime(2000, 3, 26)));
@@ -29,7 +29,7 @@ namespace PIMToolTest
             employees.Add(NewEmployee("III", "Dinh", "Van Duc", new DateTime(2000, 3, 26)));
             employees.Add(NewEmployee("KKK", "Trieu", "Van Duc", new DateTime(2000, 3, 26)));
 
-            IList<GROUP> groups = new List<GROUP>();
+            IList<Group> groups = new List<Group>();
             groups.Add(NewGroup("DevOps", employees.ElementAt(0)));
             groups.Add(NewGroup("Flutter", employees.ElementAt(1)));
             groups.Add(NewGroup("React Native", employees.ElementAt(2)));
@@ -49,23 +49,23 @@ namespace PIMToolTest
                 _unitOfWork.Save();
             }
         }
-        private EMPLOYEE NewEmployee(string visa, string firstName, string lastName, DateTime birthDate)
+        private Employee NewEmployee(string visa, string firstName, string lastName, DateTime birthDate)
         {
-            return new EMPLOYEE
+            return new Employee
             {
-                VISA = visa,
-                FIRST_NAME = firstName,
-                LAST_NAME = lastName,
-                BIRTH_DATE = birthDate,
+                Visa = visa,
+                FirstName = firstName,
+                LastName = lastName,
+                BirthDate = birthDate,
             };
         }
 
-        private GROUP NewGroup(string GroupName, EMPLOYEE GroupLeader)
+        private Group NewGroup(string GroupName, Employee GroupLeader)
         {
-            return new GROUP
+            return new Group
             {
-                NAME = GroupName,
-                GROUP_LEADER = GroupLeader.ID
+                Name = GroupName,
+                GroupLeader = GroupLeader
             };
         }
     }

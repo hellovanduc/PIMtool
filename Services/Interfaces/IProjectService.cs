@@ -10,13 +10,13 @@ namespace Services.Interfaces
         /// </summary>
         /// <param name="project"></param>
         /// <returns></returns>
-        PROJECT CreateProject(PROJECT project);
+        Project CreateProject(Project project);
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns>List all projects in the database</returns>
-        IList<PROJECT> FindAllProjects();
+        IList<Project> FindAllProjects();
 
         /// <summary>
         /// Find all the projects which match searchString and projectStatus condition, sort by sortOrder (default is sort by PROJECT_NUMBER)
@@ -25,36 +25,36 @@ namespace Services.Interfaces
         /// <param name="projectStatus"></param>
         /// <param name="sortOrder"></param>
         /// <returns></returns>
-        IList<PROJECT> FindAllProjects(string searchString, string projectStatus, string sortOrder);
+        IList<Project> FindAllProjects(string searchString, string projectStatus, string sortOrder);
 
         /// <summary> 
         /// </summary>
         /// <returns>List all employees in the database</returns>
-        IList<EMPLOYEE> FindAllEmployees();
+        IList<Employee> FindAllEmployees();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="visas"></param>
         /// <returns>The employees corresponding with the visas in list</returns>
-        IList<EMPLOYEE> FindEmployeesByVisas(List<string> visas);
+        IList<Employee> FindEmployeesByVisas(List<string> visas);
 
         /// <summary>
         /// </summary>
         /// <returns>List all groups in the database</returns>
-        IList<GROUP> FindAllGroups();
+        IList<Group> FindAllGroups();
 
         /// <summary>
         /// </summary>
         /// <param name="name">Name of the group need to be founded</param>
         /// <returns>The group if founded, else null</returns>
-        GROUP FindGroupByName(string name);
+        Group FindGroupByName(string name);
 
         /// <summary>
         /// </summary>
         /// <param name="projectNumber"></param>
         /// <returns>null if the project which has projectNumber is not found, else return the founded project</returns>
-        PROJECT FindProjectByProjectNumber(decimal projectNumber);
+        Project FindProjectByProjectNumber(decimal projectNumber);
 
         /// <summary>
         /// Update the project which corresponding project number by newProject
@@ -65,7 +65,7 @@ namespace Services.Interfaces
         /// The project after updating if the project is updated successfully.
         /// null if the project which has projectNumber is not found
         /// </returns>
-        PROJECT UpdateProjectByProjectNumber(decimal projectNumber, PROJECT newProject);
+        Project UpdateProjectByProjectNumber(decimal projectNumber, Project newProject);
 
         /// <summary>
         /// Delete one or more projects corresponding with PROJECT_NUMBER in the list

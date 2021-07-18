@@ -9,10 +9,10 @@ namespace Repositories
 {
     public class GenericRepository<TEntity> where TEntity : class
     {
-        private PIMdbEntities _context;
+        private ProjectManagementContainer _context;
         private DbSet<TEntity> dbSet;
 
-        public GenericRepository(PIMdbEntities context)
+        public GenericRepository(ProjectManagementContainer context)
         {
             _context = context;
             dbSet = _context.Set<TEntity>();
