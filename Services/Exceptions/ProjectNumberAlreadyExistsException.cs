@@ -10,7 +10,7 @@ namespace Services.Exceptions
 
         }
 
-        public ProjectNumberAlreadyExistsException(int projectNumber)
+        public ProjectNumberAlreadyExistsException(decimal projectNumber)
             : base(Resources.Resources.Resources.Resources.FollowingProjectNumberAlreadyExist + Constants.Colon + Convert.ToString(projectNumber))
         {
 

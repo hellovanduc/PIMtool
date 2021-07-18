@@ -17,7 +17,7 @@ namespace PIMToolTest
         [Test]
         public void Initialize()
         {
-            IList<Employee> employees = new List<Employee>();
+            IList<EMPLOYEE> employees = new List<EMPLOYEE>();
             employees.Add(NewEmployee("AAA", "Nguyen", "Van Duc", new DateTime(2000, 3, 26)));
             employees.Add(NewEmployee("BBB", "Tran", "Van Duc", new DateTime(2000, 3, 26)));
             employees.Add(NewEmployee("CCC", "Le", "Van Duc", new DateTime(2000, 3, 26)));
@@ -29,7 +29,7 @@ namespace PIMToolTest
             employees.Add(NewEmployee("III", "Dinh", "Van Duc", new DateTime(2000, 3, 26)));
             employees.Add(NewEmployee("KKK", "Trieu", "Van Duc", new DateTime(2000, 3, 26)));
 
-            IList<Group> groups = new List<Group>();
+            IList<GROUP> groups = new List<GROUP>();
             groups.Add(NewGroup("DevOps", employees.ElementAt(0)));
             groups.Add(NewGroup("Flutter", employees.ElementAt(1)));
             groups.Add(NewGroup("React Native", employees.ElementAt(2)));
@@ -49,9 +49,9 @@ namespace PIMToolTest
                 _unitOfWork.Save();
             }
         }
-        private Employee NewEmployee(string visa, string firstName, string lastName, DateTime birthDate)
+        private EMPLOYEE NewEmployee(string visa, string firstName, string lastName, DateTime birthDate)
         {
-            return new Employee
+            return new EMPLOYEE
             {
                 VISA = visa,
                 FIRST_NAME = firstName,
@@ -60,12 +60,12 @@ namespace PIMToolTest
             };
         }
 
-        private Group NewGroup(string GroupName, Employee GroupLeader)
+        private GROUP NewGroup(string GroupName, EMPLOYEE GroupLeader)
         {
-            return new Group
+            return new GROUP
             {
                 NAME = GroupName,
-                GROUP_LEADER = GroupLeader
+                GROUP_LEADER = GroupLeader.ID
             };
         }
     }

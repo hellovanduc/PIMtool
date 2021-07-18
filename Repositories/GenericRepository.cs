@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repositories.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace Repositories
 {
     public class GenericRepository<TEntity> where TEntity : class
     {
-        private ProjectManagementContext _context;
+        private PIMdbEntities _context;
         private DbSet<TEntity> dbSet;
 
-        public GenericRepository(ProjectManagementContext context)
+        public GenericRepository(PIMdbEntities context)
         {
             _context = context;
             dbSet = _context.Set<TEntity>();

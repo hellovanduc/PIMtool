@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PIMdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="VERSION" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="VISA" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LAST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BIRTH_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="GROUPS" Relationship="Self.FK_7CDD80D4" FromRole="EMPLOYEE" ToRole="GROUPS" />
+    <NavigationProperty Name="PROJECTs" Relationship="Self.PROJECT_EMPLOYEE" FromRole="EMPLOYEE" ToRole="PROJECT" />
+  </EntityType>
+  <EntityType Name="GROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="VERSION" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GROUP_LEADER" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_7CDD80D4" FromRole="GROUPS" ToRole="EMPLOYEE" />
+    <NavigationProperty Name="PROJECTs" Relationship="Self.FK_E293153D" FromRole="GROUPS" ToRole="PROJECT" />
+  </EntityType>
+  <EntityType Name="PROJECT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="VERSION" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PROJECT_NUMBER" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CUSTOMER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="START_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="END_DATE" Type="DateTime" Precision="0" />
+    <Property Name="GROUP_ID" Type="Decimal" Precision="19" Scale="0" Nullable="false" />
+    <NavigationProperty Name="GROUP" Relationship="Self.FK_E293153D" FromRole="PROJECT" ToRole="GROUPS" />
+    <NavigationProperty Name="EMPLOYEEs" Relationship="Self.PROJECT_EMPLOYEE" FromRole="PROJECT" ToRole="EMPLOYEE" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_7CDD80D4">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+    <End Role="GROUPS" Type="Self.GROUP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GROUPS">
+        <PropertyRef Name="GROUP_LEADER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_E293153D">
+    <End Role="GROUPS" Type="Self.GROUP" Multiplicity="1" />
+    <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PROJECT">
+        <PropertyRef Name="GROUP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PROJECT_EMPLOYEE">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="PIMdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+    <EntitySet Name="GROUPS" EntityType="Self.GROUP" />
+    <EntitySet Name="PROJECTs" EntityType="Self.PROJECT" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_7CDD80D4" Association="Self.FK_7CDD80D4">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+      <End Role="GROUPS" EntitySet="GROUPS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_E293153D" Association="Self.FK_E293153D">
+      <End Role="GROUPS" EntitySet="GROUPS" />
+      <End Role="PROJECT" EntitySet="PROJECTs" />
+    </AssociationSet>
+    <AssociationSet Name="PROJECT_EMPLOYEE" Association="Self.PROJECT_EMPLOYEE">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+      <End Role="PROJECT" EntitySet="PROJECTs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

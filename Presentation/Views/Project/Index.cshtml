@@ -5,7 +5,7 @@
 @using System.Globalization
 @using System.Collections.Generic;
 @using PagedList.Mvc
-@model PagedList.IPagedList<Project>
+@model PagedList.IPagedList<PROJECT>
 
 @{ CultureInfo cultureInfo = new CultureInfo(Culture); }
 <div class="content_header">
@@ -65,14 +65,14 @@
             @foreach (var project in Model)
             {
                 <tr>
-                    <td><input type="checkbox" disabled="@(project.STATUS != Status.NEW)"></td>
+                    <td><input type="checkbox" disabled="@(project.STATUS != Status.NEW.ToString())"></td>
                     <td>
                         <a href="/@Culture/project/edit/@project.PROJECT_NUMBER">
                             @project.PROJECT_NUMBER
                         </a>
                     </td>
                     <td>@project.NAME</td>
-                    @switch (project.STATUS)
+                    @switch (StatusHelper.StringToStatus(project.STATUS))
                     {
                         case Status.NEW:
                             <td>@Resources.StatusNEW</td>
@@ -90,7 +90,7 @@
                     <td>@project.CUSTOMER</td>
                     <td>@project.START_DATE.ToString(cultureInfo.DateTimeFormat.ShortDatePattern)</td>
                     <td>
-                        @if (project.STATUS == Status.NEW)
+                        @if (project.STATUS == Status.NEW.ToString())
                         {
                             <a href="#">
                                 <img class="btn_delete" width="20px" height="20px"

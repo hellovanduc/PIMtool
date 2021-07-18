@@ -18,14 +18,14 @@ namespace Services
             _unitOfWork = new UnitOfWork();
         }
 
-        public Project CreateProject(Project project)
+        public PROJECT CreateProject(PROJECT project)
         {
             if (FindProjectByProjectNumber(project.PROJECT_NUMBER) != null)
             {
                 throw new ProjectNumberAlreadyExistsException(project.PROJECT_NUMBER);
             }
 
-            List<string> invalidVisas = FindInvalidVisas(project.EMPLOYEES);
+            List<string> invalidVisas = FindInvalidVisas(project.EMPLOYEEs.ToHashSet());
             if (invalidVisas != null)
             {
                 throw new InvalidVisasException(invalidVisas);
@@ -55,7 +55,7 @@ namespace Services
         /// </summary>
         /// <param name="employees"></param>
         /// <returns>List of invalid visas in set employees. Return null if the set employees is null or no invalid visas is founded</returns>
-        private List<string> FindInvalidVisas(ISet<Employee> employees)
+        private List<string> FindInvalidVisas(ISet<EMPLOYEE> employees)
         {
             if (employees == null)
             {
@@ -71,7 +71,7 @@ namespace Services
             }
 
             //  Find the employees corresponding with list visas
-            IList<Employee> foundedEmployees = FindEmployeesByVisas(visas);
+            IList<EMPLOYEE> foundedEmployees = FindEmployeesByVisas(visas);
 
             //  If the number of employees is founded less than the number of employees in set employees, find the invalid visas
             if (foundedEmployees.Count < employees.Count)
@@ -88,9 +88,9 @@ namespace Services
             return invalidVisas;
         }
 
-        public IList<Project> FindAllProjects()
+        public IList<PROJECT> FindAllProjects()
         {
-            IList<Project> projects;
+            IList<PROJECT> projects;
 
             using (_unitOfWork)
             {
@@ -99,20 +99,19 @@ namespace Services
 
             foreach (var project in projects)
             {
-                project.EMPLOYEES = null;
+                project.EMPLOYEEs = null;
                 project.GROUP = null;
             }
 
             return projects;
         }
 
-        public IList<Project> FindAllProjects(string searchString, string projectStatus, string sortOrder)
+        public IList<PROJECT> FindAllProjects(string searchString, string projectStatus, string sortOrder)
         {
-            IList<Project> projects;
+            IList<PROJECT> projects;
             using (_unitOfWork)
             {
                 searchString = searchString.ToLower();
-                Status searchStatus = StatusHelper.StringToStatus(projectStatus);
                 try
                 {
                     //  If searchString can convert to an integer, we can compare it with PROJECT_NUMBER to filter the result
@@ -121,7 +120,7 @@ namespace Services
                     projects = _unitOfWork.ProjectRepository
                         .Get(x => x.PROJECT_NUMBER == searchNumber
                                 || x.NAME == searchString
-                                || x.STATUS == searchStatus)
+                                || x.STATUS == projectStatus)
                         .ToList();
                 }
                 catch (FormatException)
@@ -129,7 +128,7 @@ namespace Services
                     //  If searchString cannot convert to an integer, we will not check PROJECT_NUMBER of the project
                     projects = _unitOfWork.ProjectRepository
                         .Get(x => x.NAME == searchString
-                                || x.STATUS == searchStatus)
+                                || x.STATUS == projectStatus)
                         .ToList();
                 }
             }
@@ -139,7 +138,7 @@ namespace Services
             return projects;
         }
 
-        public IList<Employee> FindAllEmployees()
+        public IList<EMPLOYEE> FindAllEmployees()
         {
             using (_unitOfWork)
             {
@@ -150,9 +149,9 @@ namespace Services
             }
         }
 
-        public IList<Group> FindAllGroups()
+        public IList<GROUP> FindAllGroups()
         {
-            IList<Group> groups;
+            IList<GROUP> groups;
 
             using (_unitOfWork)
             {
@@ -162,7 +161,7 @@ namespace Services
             return groups;
         }
 
-        public Project FindProjectByProjectNumber(int projectNumber)
+        public PROJECT FindProjectByProjectNumber(decimal projectNumber)
         {
             using (_unitOfWork)
             {
@@ -173,9 +172,9 @@ namespace Services
             }
         }
 
-        public Project UpdateProjectByProjectNumber(int projectNumber, Project newProject)
+        public PROJECT UpdateProjectByProjectNumber(decimal projectNumber, PROJECT newProject)
         {
-            List<string> invalidVisas = FindInvalidVisas(newProject.EMPLOYEES);
+            List<string> invalidVisas = FindInvalidVisas(newProject.EMPLOYEEs.ToHashSet());
             if (invalidVisas != null)
             {
                 throw new InvalidVisasException(invalidVisas);
@@ -216,14 +215,14 @@ namespace Services
         /// </summary>
         /// <param name="target"></param>
         /// <param name="source"></param>
-        private void AssignProject(Project target, Project source)
+        private void AssignProject(PROJECT target, PROJECT source)
         {
             target.NAME = source.NAME;
             target.CUSTOMER = source.CUSTOMER;
             target.STATUS = source.STATUS;
             target.START_DATE = source.START_DATE;
             target.END_DATE = source.END_DATE;
-            target.EMPLOYEES = source.EMPLOYEES;
+            target.EMPLOYEEs = source.EMPLOYEEs;
             target.GROUP = source.GROUP;
         }
 
@@ -238,7 +237,7 @@ namespace Services
                 int count = 0;
                 foreach (int projectNumber in projectNumbers)
                 {
-                    Project project = _unitOfWork.ProjectRepository.Get(x => x.PROJECT_NUMBER == projectNumber)
+                    PROJECT project = _unitOfWork.ProjectRepository.Get(x => x.PROJECT_NUMBER == projectNumber)
                         .FirstOrDefault();
                     if (project != null)
                     {
@@ -251,7 +250,7 @@ namespace Services
             }
         }
 
-        public IList<Employee> FindEmployeesByVisas(List<string> visas)
+        public IList<EMPLOYEE> FindEmployeesByVisas(List<string> visas)
         {
             if (visas == null)
             {
@@ -259,11 +258,11 @@ namespace Services
             }
             using (_unitOfWork)
             {
-                IList<Employee> employees = new List<Employee>();
+                IList<EMPLOYEE> employees = new List<EMPLOYEE>();
 
                 foreach (string visa in visas)
                 {
-                    Employee employee = _unitOfWork.EmployeeRepository.Get(x => x.VISA == visa)
+                    EMPLOYEE employee = _unitOfWork.EmployeeRepository.Get(x => x.VISA == visa)
                         .FirstOrDefault();
                     if (employee != null)
                     {
@@ -275,7 +274,7 @@ namespace Services
             }
         }
 
-        public Group FindGroupByName(string name)
+        public GROUP FindGroupByName(string name)
         {
             using (_unitOfWork)
             {
@@ -290,7 +289,7 @@ namespace Services
         /// <param name="projects"></param>
         /// <param name="sortOrder"></param>
         /// <returns></returns>
-        private IList<Project> SortProjects(IList<Project> projects, string sortOrder)
+        private IList<PROJECT> SortProjects(IList<PROJECT> projects, string sortOrder)
         {
             var order = SortOrderHelper.StringToSortOrder(sortOrder);
 

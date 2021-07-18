@@ -59,6 +59,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -72,11 +74,33 @@
     <Compile Include="Enums\SortOrder.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="GenericRepository.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\Project.cs" />
-    <Compile Include="ProjectManagementContext.cs" />
+    <Compile Include="Models\EMPLOYEE.cs">
+      <DependentUpon>ProjectManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GROUP.cs">
+      <DependentUpon>ProjectManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROJECT.cs">
+      <DependentUpon>ProjectManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagement.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagement.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectManagement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectManagement.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>ProjectManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
@@ -87,8 +111,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <EntityDeploy Include="Models\ProjectManagement.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProjectManagement.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Models\ProjectManagement.edmx.diagram">
+      <DependentUpon>ProjectManagement.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\ProjectManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProjectManagement.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagement.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProjectManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProjectManagement.edmx</DependentUpon>
+      <LastGenOutput>ProjectManagement.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -12,7 +12,7 @@ namespace PIMTool.ViewModels
         [Range(1000, 9999, ErrorMessageResourceName = "ProjectNumberRangeError", ErrorMessageResourceType = typeof(Resources.Resources.Resources.Resources))]
         [Remote("IsProjectNumberExist", "api", AdditionalFields = "EditMode")]
         [DisplayFormat(DataFormatString = "{0:#.#}", ApplyFormatInEditMode = true)]
-        public int PROJECT_NUMBER { get; set; }
+        public decimal PROJECT_NUMBER { get; set; }
 
         [Display(Name = "ProjectName", ResourceType = typeof(Resources.Resources.Resources.Resources))]
         [Required(ErrorMessageResourceName = "ProjectNameRequireError", ErrorMessageResourceType = typeof(Resources.Resources.Resources.Resources))]
@@ -53,7 +53,7 @@ namespace PIMTool.ViewModels
 
         public SelectList AllGroups { get; set; }
 
-        public int VERSION { get; set; }
+        public decimal VERSION { get; set; }
 
         public bool EditMode { get; set; }
         public string Error { get; set; }

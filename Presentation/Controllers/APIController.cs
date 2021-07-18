@@ -17,7 +17,7 @@ namespace PIMTool.Controllers
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
-            Project project = service.FindProjectByProjectNumber(PROJECT_NUMBER);
+            PROJECT project = service.FindProjectByProjectNumber(PROJECT_NUMBER);
             if (project != null)
             {
                 return Json(Resources.Resources.Resources.Resources.ProjectNumberAlreadyExist, JsonRequestBehavior.AllowGet);

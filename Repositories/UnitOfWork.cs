@@ -5,54 +5,54 @@ namespace Repositories
 {
     public class UnitOfWork : IDisposable
     {
-        private ProjectManagementContext _context = new ProjectManagementContext();
+        private PIMdbEntities _context = new PIMdbEntities();
         private bool isDisposed = false;
-        private GenericRepository<Project> _projectRepository;
-        private GenericRepository<Group> _groupRepository;
-        private GenericRepository<Employee> _employeeRepository;
+        private GenericRepository<PROJECT> _projectRepository;
+        private GenericRepository<GROUP> _groupRepository;
+        private GenericRepository<EMPLOYEE> _employeeRepository;
 
-        private ProjectManagementContext Context { 
+        private PIMdbEntities Context { 
             get {
                 if (isDisposed)
                 {
-                    _context = new ProjectManagementContext();
+                    _context = new PIMdbEntities();
                 }
                 return _context; 
             } 
         }
 
-        public GenericRepository<Project> ProjectRepository
+        public GenericRepository<PROJECT> ProjectRepository
         {
             get
             {
                 if (_projectRepository == null)
                 {
-                    _projectRepository = new GenericRepository<Project>(Context);
+                    _projectRepository = new GenericRepository<PROJECT>(Context);
                 }
                 return _projectRepository;
             }
         }
 
-        public GenericRepository<Employee> EmployeeRepository
+        public GenericRepository<EMPLOYEE> EmployeeRepository
         {
             get
             {
 
                 if (_employeeRepository == null)
                 {
-                    _employeeRepository = new GenericRepository<Employee>(Context);
+                    _employeeRepository = new GenericRepository<EMPLOYEE>(Context);
                 }
                 return _employeeRepository;
             }
         }
 
-        public GenericRepository<Group> GroupRepository
+        public GenericRepository<GROUP> GroupRepository
         {
             get
             {
                 if (_groupRepository == null)
                 {
-                    _groupRepository = new GenericRepository<Group>(Context);
+                    _groupRepository = new GenericRepository<GROUP>(Context);
                 }
                 return _groupRepository;
             }
