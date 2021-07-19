@@ -72,9 +72,30 @@
     <Compile Include="Enums\SortOrder.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="GenericRepository.cs" />
+    <Compile Include="Migrations\202107190400275_PIMdb_v0.cs" />
+    <Compile Include="Migrations\202107190400275_PIMdb_v0.designer.cs">
+      <DependentUpon>202107190400275_PIMdb_v0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107190402297_PIMdb_v1.cs" />
+    <Compile Include="Migrations\202107190402297_PIMdb_v1.designer.cs">
+      <DependentUpon>202107190402297_PIMdb_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107190403280_PIMdb_v2.cs" />
+    <Compile Include="Migrations\202107190403280_PIMdb_v2.designer.cs">
+      <DependentUpon>202107190403280_PIMdb_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107190404195_PIMdb_v3.cs" />
+    <Compile Include="Migrations\202107190404195_PIMdb_v3.designer.cs">
+      <DependentUpon>202107190404195_PIMdb_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107190405226_PIMdb_v4.cs" />
+    <Compile Include="Migrations\202107190405226_PIMdb_v4.designer.cs">
+      <DependentUpon>202107190405226_PIMdb_v4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupDetail.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="ProjectManagementContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +110,23 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202107190400275_PIMdb_v0.resx">
+      <DependentUpon>202107190400275_PIMdb_v0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107190402297_PIMdb_v1.resx">
+      <DependentUpon>202107190402297_PIMdb_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107190403280_PIMdb_v2.resx">
+      <DependentUpon>202107190403280_PIMdb_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107190404195_PIMdb_v3.resx">
+      <DependentUpon>202107190404195_PIMdb_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107190405226_PIMdb_v4.resx">
+      <DependentUpon>202107190405226_PIMdb_v4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

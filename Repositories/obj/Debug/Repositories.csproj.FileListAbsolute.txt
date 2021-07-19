@@ -84,3 +84,9 @@ D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.csproj.CoreCom
 D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.csproj.CopyComplete
 D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.dll
 D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.pdb
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v0.resources
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.csproj.GenerateResource.cache
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v1.resources
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v2.resources
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v3.resources
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v4.resources

@@ -9,6 +9,7 @@ namespace Repositories.Models
         public string VISA { get; set; }
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
+        public string FULL_NAME { get; set; }
         public DateTime BIRTH_DATE { get; set; }
         public int VERSION { get; set; }
         virtual public ISet<Project> PROJECTS { get; set; }

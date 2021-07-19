@@ -15,7 +15,8 @@ namespace Repositories
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Project> Projects { get; set; }
-         
+        public DbSet<GroupDetail> GroupDetails { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Prevents table names from being pluralized (ex: Employees => Employee)

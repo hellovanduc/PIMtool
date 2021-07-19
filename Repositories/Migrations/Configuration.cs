@@ -11,8 +11,6 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "Repositories.ProjectManagementContext";
         }
 
