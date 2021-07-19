@@ -90,3 +90,4 @@ D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIM
 D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v2.resources
 D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v3.resources
 D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_v4.resources
+D:\Documents\Git-repo\PIMTool\Repositories\obj\Debug\Repositories.Migrations.PIMdb_addSlogan.resources
