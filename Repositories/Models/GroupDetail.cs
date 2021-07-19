@@ -11,5 +11,6 @@ namespace Repositories.Models
         public long Id { get; set; }
         public DateTime EstablishDate { get; set; }
         public int NumberOfProjectHasDone { get; set; }
+        public int MaximumNumberOfEmployee { get; set; }
     }
 }

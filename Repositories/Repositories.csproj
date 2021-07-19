@@ -92,6 +92,10 @@
     <Compile Include="Migrations\202107190405226_PIMdb_v4.designer.cs">
       <DependentUpon>202107190405226_PIMdb_v4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107190646490_PIMdb_addMaxNumOfEmployee.cs" />
+    <Compile Include="Migrations\202107190646490_PIMdb_addMaxNumOfEmployee.designer.cs">
+      <DependentUpon>202107190646490_PIMdb_addMaxNumOfEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Group.cs" />
@@ -126,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107190405226_PIMdb_v4.resx">
       <DependentUpon>202107190405226_PIMdb_v4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107190646490_PIMdb_addMaxNumOfEmployee.resx">
+      <DependentUpon>202107190646490_PIMdb_addMaxNumOfEmployee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
